@@ -5,6 +5,8 @@ seo_title: "Reconnaître une lecture de tarot sérieuse : six repères concrets"
 meta_desc: "Vous n'avez jamais consulté et vous craignez de mal tomber ? Six repères concrets pour distinguer une lecture de tarot sérieuse d'une pratique douteuse."
 date: 2026-11-01
 lang: fr
+illustration: "carnet-et-cartes"
+illustration_alt: "Carnet ouvert, stylo et cartes de tarot dorées à la lueur d'une bougie"
 ---
 
 C'est la peur la plus répandue, et elle est saine : **tomber sur quelqu'un qui profite d'un moment de fragilité.**

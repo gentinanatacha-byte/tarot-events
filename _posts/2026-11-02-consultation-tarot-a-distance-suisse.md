@@ -5,6 +5,8 @@ seo_title: "Consultation de tarot à distance depuis la Suisse"
 meta_desc: "Visio, WhatsApp ou lecture écrite : le déroulé d'une consultation de Tarot de Marseille à distance, ce qu'il faut préparer et ce qu'il ne faut pas en attendre."
 date: 2026-11-02
 lang: fr
+illustration: "consultation-distance"
+illustration_alt: "Appel en cours sur un téléphone, à côté d'un jeu de cartes et d'une bougie"
 ---
 
 « Est-ce que ça marche vraiment, à distance ? »

@@ -5,6 +5,8 @@ seo_title: "Animer une soirée d'entreprise à Genève : les animations qui marc
 meta_desc: "Soirée de fin d'année, séminaire, afterwork à Genève : pourquoi la plupart des animations ne créent aucun lien, et les trois critères d'une animation qui fonctionne vraiment."
 date: 2026-11-05
 lang: fr
+illustration: "soiree-gala"
+illustration_alt: "Jeu de tarot posé sur une table de velours, invité·es en arrière-plan dans un salon aux bougies"
 ---
 
 Vous avez réservé un beau lieu. Le traiteur est irréprochable. Et à vingt-deux heures, les gens sont encore debout par petits groupes — exactement les mêmes qu'au bureau.

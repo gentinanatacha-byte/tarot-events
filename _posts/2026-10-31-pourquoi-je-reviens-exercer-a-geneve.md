@@ -5,6 +5,8 @@ seo_title: "Genève, ma grand-mère et les cartes — Natacha Laure, tarologue"
 meta_desc: "Née à Genève, formée aux côtés de ma grand-mère médium. Ce qu'elle m'a transmis, et pourquoi je reviens exercer sur l'arc lémanique."
 date: 2026-10-31
 lang: fr
+illustration: "natacha-consultation"
+illustration_alt: "Natacha Laure souriante dans son espace de consultation, cartes étalées devant elle"
 ---
 
 Je suis née à Genève. C'est un détail d'état civil, et c'est aussi tout le reste.

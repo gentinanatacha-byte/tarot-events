@@ -75,6 +75,8 @@ image: /assets/images/natacha-animation-1000.webp
   </div>
 </section>
 
+{% include tirage.html %}
+
 <div class="bandeau">
   {% include img.html name="salon-bougies" alt="Salon tamisé dressé pour une consultation : table nappée, bougeoirs et miroir ancien" sizes="100vw" %}
   <p>Un moment juste, et qu'on se raconte encore le lendemain.</p>
@@ -99,6 +101,11 @@ image: /assets/images/natacha-animation-1000.webp
       {%- for post in derniers %}
       <li>
         <article class="post-card">
+          {%- if post.illustration %}
+          <a class="post-vignette" href="{{ post.url }}" tabindex="-1" aria-hidden="true">
+            {% include img.html name=post.illustration alt="" sizes="(min-width: 980px) 30vw, 100vw" %}
+          </a>
+          {%- endif %}
           <time datetime="{{ post.date | date_to_xmlschema }}">{% include date-fr.html d=post.date %}</time>
           <h3>{{ post.title }}</h3>
           <p>{{ post.chapo | default: post.excerpt | strip_html | truncatewords: 24 }}</p>

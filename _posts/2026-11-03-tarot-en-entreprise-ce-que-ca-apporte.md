@@ -5,6 +5,8 @@ seo_title: "Le tarot en entreprise : ce que ça apporte, et ce que ça n'est pas
 meta_desc: "Animation tarot en soirée d'entreprise ou séminaire : les règles qui la rendent confortable pour tout le monde, et les limites à poser avant de réserver."
 date: 2026-11-03
 lang: fr
+illustration: "coin-salon"
+illustration_alt: "Deux fauteuils et un guéridon nappé dans un coin de salon à l'écart"
 ---
 
 C'est toujours la même question, et elle arrive au deuxième mail.

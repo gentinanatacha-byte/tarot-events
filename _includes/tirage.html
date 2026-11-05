@@ -1,0 +1,50 @@
+{%- comment -%}
+  Tirage d'accueil : trois cartes face cachée, une seule se retourne.
+  Les noms viennent de _data/arcanes.yml. Aucune interprétation n'est affichée :
+  la carte est révélée, puis on renvoie vers Auréa ou vers une consultation.
+  Sans JavaScript, le bloc affiche simplement le texte et les liens.
+{%- endcomment -%}
+{%- assign L = site.data.i18n[page.lang] -%}
+<section class="section-tirage">
+  <div class="wrap wrap-narrow center">
+    <p class="eyebrow">{{ L.tirage_eyebrow }}</p>
+    <h2>{{ L.tirage_titre }}</h2>
+    <p class="lede">{{ L.tirage_chapo }}</p>
+
+    <script type="application/json" data-arcanes>
+      [{% for a in site.data.arcanes %}{"num":{{ a.num | jsonify }},"nom":{{ a[page.lang] | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]
+    </script>
+
+    <div class="tirage" data-tirage>
+      <button class="carte" type="button" aria-label="{{ L.tirage_invite }}">
+        <span class="carte-inner">
+          <span class="carte-dos">{% include motif-carte.html %}</span>
+          <span class="carte-face"><em class="num"></em><strong class="nom"></strong></span>
+        </span>
+      </button>
+      <button class="carte" type="button" aria-label="{{ L.tirage_invite }}">
+        <span class="carte-inner">
+          <span class="carte-dos">{% include motif-carte.html %}</span>
+          <span class="carte-face"><em class="num"></em><strong class="nom"></strong></span>
+        </span>
+      </button>
+      <button class="carte" type="button" aria-label="{{ L.tirage_invite }}">
+        <span class="carte-inner">
+          <span class="carte-dos">{% include motif-carte.html %}</span>
+          <span class="carte-face"><em class="num"></em><strong class="nom"></strong></span>
+        </span>
+      </button>
+    </div>
+
+    <p class="tirage-invite" data-tirage-invite>{{ L.tirage_invite }}</p>
+
+    <div class="tirage-suite" data-tirage-suite hidden>
+      <p class="tirage-note">{{ L.tirage_suite }}</p>
+      <p>
+        <a class="btn btn-solid" href="https://natachalaurevoyance.fr/aurea/" rel="noopener">{{ L.tirage_cta_aurea }}</a>
+        <a class="btn" href="{{ L.base }}{% if page.lang == 'fr' %}/consultations/{% elsif page.lang == 'en' %}/readings/{% else %}/beratungen/{% endif %}">{{ L.tirage_cta_consult }}</a>
+      </p>
+      <p><button class="lien-nu" type="button" data-tirage-reset>{{ L.tirage_rejouer }}</button></p>
+    </div>
+  </div>
+</section>

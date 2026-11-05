@@ -24,6 +24,11 @@ image: /assets/images/tarot-marseille-1400.webp
       {%- for post in site.posts %}
       <li>
         <article class="post-card">
+          {%- if post.illustration %}
+          <a class="post-vignette" href="{{ post.url }}" tabindex="-1" aria-hidden="true">
+            {% include img.html name=post.illustration alt="" sizes="(min-width: 980px) 30vw, 100vw" %}
+          </a>
+          {%- endif %}
           <time datetime="{{ post.date | date_to_xmlschema }}">{% include date-fr.html d=post.date %}</time>
           <h3>{{ post.title }}</h3>
           <p>{{ post.chapo | default: post.excerpt | strip_html | truncatewords: 30 }}</p>

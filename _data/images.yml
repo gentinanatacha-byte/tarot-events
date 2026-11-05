@@ -46,3 +46,15 @@ aurea-app:
   w: 1300
   h: 732
   widths: [480, 768, 1024, 1300]
+soiree-gala:
+  w: 1440
+  h: 599
+  widths: [480, 768, 1024, 1440]
+coin-salon:
+  w: 1000
+  h: 666
+  widths: [480, 768, 1000]
+carnet-et-cartes:
+  w: 1400
+  h: 933
+  widths: [480, 768, 1024, 1400]

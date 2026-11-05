@@ -5,6 +5,8 @@ seo_title: "Animation de mariage sur l'arc lémanique : tenir les temps creux"
 meta_desc: "Cocktail, séance photo, creux d'avant-dessert : les vrais moments à occuper dans un mariage entre Genève et Lausanne, et les animations qui y fonctionnent."
 date: 2026-11-04
 lang: fr
+illustration: "natacha-animation"
+illustration_alt: "Natacha Laure lisant les cartes pour une invitée lors d'un mariage, guirlandes et bougies"
 ---
 
 Quand on prépare un mariage, on pense à la cérémonie, au repas et à l'ouverture de bal. Ce sont les moments forts, et ils se préparent bien.

@@ -365,3 +365,123 @@ table.tarifs td.num { text-align: right; padding-right: 0; white-space: nowrap; 
   .hero-media img { animation: kenburns 26s ease-in-out infinite alternate; transform-origin: center 40%; }
   @keyframes kenburns { from { transform: scale(1); } to { transform: scale(1.085); } }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   MOUVEMENT
+   Tout ce qui suit est désactivé si le système de la personne
+   demande moins d'animations (réglage d'accessibilité).
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ---------- Barre de progression de lecture ---------- */
+.progression {
+  position: fixed; inset-inline: 0; top: 0; height: 2px; z-index: 80;
+  background: linear-gradient(90deg, var(--or), var(--or-pale));
+  transform: scaleX(0); transform-origin: 0 50%;
+  will-change: transform; pointer-events: none;
+}
+
+/* ---------- Apparition au défilement ---------- */
+html.js [data-anim] {
+  opacity: 0;
+  transform: translateY(1.4rem);
+  transition: opacity .85s ease, transform .85s cubic-bezier(.22, .68, .24, 1);
+  transition-delay: calc(var(--rang, 0) * 90ms);
+}
+html.js [data-anim].est-vu { opacity: 1; transform: none; }
+
+/* le filet doré se trace tout seul */
+html.js hr.rule[data-anim] { opacity: 1; transform: none; transform-origin: 0 50%; scale: 0 1; transition: scale .9s cubic-bezier(.22,.68,.24,1); }
+html.js hr.rule[data-anim].est-vu { scale: 1 1; }
+
+/* ---------- Parallaxe douce sur les bandeaux ---------- */
+.bandeau img { will-change: transform; }
+
+/* ---------- Survols ---------- */
+.card, .formule, .post-card { transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition); }
+.card:hover, .post-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--beige);
+  box-shadow: 0 18px 40px -24px rgba(0, 0, 0, .9), 0 0 0 1px rgba(184, 132, 58, .25);
+}
+.split img, .bandeau img { transition: transform 1.2s cubic-bezier(.22,.68,.24,1); }
+.split:hover img { transform: scale(1.02); }
+.btn { position: relative; overflow: hidden; }
+.btn::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(110deg, transparent 35%, rgba(224, 192, 136, .22) 50%, transparent 65%);
+  transform: translateX(-120%); transition: transform .75s ease;
+}
+.btn:hover::after { transform: translateX(120%); }
+
+/* ---------- Tirage ---------- */
+.section-tirage { background: var(--noir-2); border-block: 1px solid var(--brun-cl); position: relative; overflow: hidden; }
+.section-tirage::before {
+  content: ""; position: absolute; inset: -40% 20% auto 20%; height: 70%;
+  background: radial-gradient(ellipse at 50% 0%, rgba(184, 132, 58, .14), transparent 70%);
+  pointer-events: none;
+}
+.tirage { display: flex; justify-content: center; gap: clamp(.75rem, 3vw, 1.75rem); margin-top: 2.5rem; perspective: 1400px; }
+.carte {
+  flex: 0 1 clamp(6.5rem, 22vw, 10rem);
+  aspect-ratio: 2 / 3;
+  background: none; border: 0; padding: 0; cursor: pointer;
+  transition: transform .5s cubic-bezier(.22,.68,.24,1), filter .4s ease;
+}
+.carte:hover:not(.est-tiree) { transform: translateY(-10px) rotate(-1.5deg); }
+.carte:focus-visible { outline: 2px solid var(--or-pale); outline-offset: 6px; }
+.carte-inner {
+  position: relative; display: block; width: 100%; height: 100%;
+  transform-style: preserve-3d; transition: transform .9s cubic-bezier(.3, .85, .35, 1);
+}
+.carte.est-tiree .carte-inner { transform: rotateY(180deg); }
+.carte-dos, .carte-face {
+  position: absolute; inset: 0; border-radius: .4rem;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(160deg, var(--brun) 0%, var(--noir) 100%);
+  box-shadow: 0 14px 34px -18px rgba(0, 0, 0, .95);
+}
+.carte-dos .motif { width: 100%; height: 100%; display: block; }
+.carte-face {
+  transform: rotateY(180deg);
+  flex-direction: column; gap: .45rem; padding: .75rem;
+  border: 1px solid rgba(184, 132, 58, .55);
+  background: linear-gradient(160deg, #241a12 0%, #120d09 100%);
+}
+.carte-face .num { font-family: var(--font-display); font-style: normal; font-size: clamp(1.1rem, 3.2vw, 1.6rem); color: var(--or); letter-spacing: .06em; }
+.carte-face .nom { font-family: var(--font-display); font-weight: 400; font-size: clamp(.78rem, 2.1vw, .98rem); color: var(--or-pale); line-height: 1.25; text-align: center; }
+.carte.est-tiree { cursor: default; }
+.tirage:has(.est-tiree) .carte:not(.est-tiree) { opacity: .4; filter: saturate(.4); pointer-events: none; }
+.tirage-invite { margin-top: 1.5rem; font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gris); }
+.tirage-suite { margin-top: 1.75rem; }
+.tirage-note { max-width: 34rem; margin-inline: auto; color: var(--beige-cl); }
+.lien-nu { background: none; border: 0; padding: 0; color: var(--gris); font: inherit; font-size: .82rem; cursor: pointer; text-decoration: underline; text-underline-offset: 4px; }
+.lien-nu:hover { color: var(--or-cl); }
+
+/* ---------- Respect du réglage d'accessibilité ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html.js [data-anim] { opacity: 1 !important; transform: none !important; transition: none !important; }
+  html.js hr.rule[data-anim] { scale: 1 1 !important; transition: none !important; }
+  .progression { display: none; }
+  .carte-inner { transition: none; }
+  .carte:hover:not(.est-tiree) { transform: none; }
+  .btn::after { display: none; }
+  .split:hover img { transform: none; }
+  .card:hover, .post-card:hover { transform: none; }
+}
+
+/* ---------- Illustration des articles ---------- */
+.post-media { position: relative; overflow: hidden; border-bottom: 1px solid var(--brun-cl); }
+.post-media img { display: block; width: 100%; height: clamp(14rem, 34vw, 24rem); object-fit: cover; }
+.post-media::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(14,11,8,.35), rgba(14,11,8,.15) 40%, rgba(14,11,8,.9));
+}
+.post-card { padding: 0; overflow: hidden; }
+.post-card > :not(.post-vignette) { margin-inline: 1.6rem; }
+.post-card > time { display: block; margin-top: 1.4rem; }
+.post-card > a.more { margin-bottom: 1.6rem; }
+.post-vignette { display: block; overflow: hidden; border-bottom: 1px solid var(--brun-cl); }
+.post-vignette img { display: block; width: 100%; height: 11rem; object-fit: cover; transition: transform 1s cubic-bezier(.22,.68,.24,1); }
+.post-card:hover .post-vignette img { transform: scale(1.05); }
+@media (prefers-reduced-motion: reduce) { .post-card:hover .post-vignette img { transform: none; } }

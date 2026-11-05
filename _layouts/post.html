@@ -3,6 +3,11 @@ layout: default
 ---
 {% assign L = site.data.i18n[page.lang] %}
 <article>
+{%- if page.illustration %}
+  <div class="post-media">
+    {% include img.html name=page.illustration alt=page.illustration_alt sizes="100vw" priority=true %}
+  </div>
+{%- endif %}
   <section class="wrap wrap-narrow">
     <p class="post-meta">{{ L.publie }} {% include date-fr.html d=page.date %}</p>
     <h1>{{ page.title }}</h1>

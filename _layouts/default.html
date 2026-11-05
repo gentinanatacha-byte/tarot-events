@@ -4,6 +4,7 @@
 <html lang="{{ page.lang }}">
 <head>
 <meta charset="utf-8">
+<script>document.documentElement.className+=" js";</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }} — {{ site.title }}{% endif %}</title>
 <meta name="description" content="{{ page.meta_desc | default: site.description | strip_newlines | strip }}">
@@ -28,8 +29,10 @@
 <meta property="og:title" content="{% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}">
 <meta property="og:description" content="{{ page.meta_desc | default: site.description | strip_newlines | strip }}">
 <meta property="og:url" content="{{ page.url | absolute_url }}">
-{%- if page.image %}
-<meta property="og:image" content="{{ page.image | absolute_url }}">
+{%- assign og = page.image %}
+{%- if page.illustration %}{% assign im = site.data.images[page.illustration] %}{% capture og %}/assets/images/{{ page.illustration }}-{{ im.w }}.webp{% endcapture %}{% endif %}
+{%- if og %}
+<meta property="og:image" content="{{ og | absolute_url }}">
 {%- endif %}
 <meta name="twitter:card" content="summary_large_image">
 

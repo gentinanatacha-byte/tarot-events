@@ -9,6 +9,14 @@ fr:
     - { ref: "apropos",       url: "/a-propos/",             label: "À propos" }
     - { ref: "contact",       url: "/contact/",              label: "Contact" }
   communes: "Genève, Nyon, Rolle, Morges, Lausanne et leurs environs"
+  tirage_eyebrow: "Un instant avec les cartes"
+  tirage_titre: "Tirez une carte"
+  tirage_chapo: "Trois cartes, face cachée. Choisissez celle vers laquelle votre main va d'elle-même."
+  tirage_invite: "Touchez une carte pour la retourner"
+  tirage_suite: "Voilà votre carte. Ce qu'elle a à vous dire, elle ne le dit pas toute seule — c'est le travail d'une lecture."
+  tirage_cta_aurea: "Poursuivre avec Auréa"
+  tirage_cta_consult: "Réserver une lecture"
+  tirage_rejouer: "Retirer une carte"
   cta_devis: "Demander un devis"
   menu: "Menu"
   footer_nav: "Navigation"
@@ -34,6 +42,14 @@ en:
     - { ref: "apropos",       url: "/en/about/",             label: "About" }
     - { ref: "contact",       url: "/en/contact/",           label: "Contact" }
   communes: "Geneva, Nyon, Rolle, Morges, Lausanne and the surrounding area"
+  tirage_eyebrow: "A moment with the cards"
+  tirage_titre: "Draw a card"
+  tirage_chapo: "Three cards, face down. Choose the one your hand goes to on its own."
+  tirage_invite: "Tap a card to turn it over"
+  tirage_suite: "There is your card. What it has to say, it does not say on its own — that is the work of a reading."
+  tirage_cta_aurea: "Carry on with Auréa"
+  tirage_cta_consult: "Book a reading"
+  tirage_rejouer: "Draw again"
   cta_devis: "Request a quote"
   menu: "Menu"
   footer_nav: "Navigation"
@@ -59,6 +75,14 @@ de:
     - { ref: "apropos",       url: "/de/ueber-mich/",        label: "Über mich" }
     - { ref: "contact",       url: "/de/kontakt/",           label: "Kontakt" }
   communes: "Genf, Nyon, Rolle, Morges, Lausanne und Umgebung"
+  tirage_eyebrow: "Ein Moment mit den Karten"
+  tirage_titre: "Ziehen Sie eine Karte"
+  tirage_chapo: "Drei Karten, verdeckt. Wählen Sie die, zu der Ihre Hand von selbst geht."
+  tirage_invite: "Karte antippen, um sie umzudrehen"
+  tirage_suite: "Das ist Ihre Karte. Was sie Ihnen sagt, sagt sie nicht von allein — das ist die Arbeit einer Lesung."
+  tirage_cta_aurea: "Mit Auréa weitermachen"
+  tirage_cta_consult: "Beratung buchen"
+  tirage_rejouer: "Neu ziehen"
   cta_devis: "Offerte anfragen"
   menu: "Menü"
   footer_nav: "Navigation"
