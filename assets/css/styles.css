@@ -422,8 +422,8 @@ html.js hr.rule[data-anim].est-vu { scale: 1 1; }
 }
 .tirage { display: flex; justify-content: center; gap: clamp(.75rem, 3vw, 1.75rem); margin-top: 2.5rem; perspective: 1400px; }
 .carte {
-  flex: 0 1 clamp(6.5rem, 22vw, 10rem);
-  aspect-ratio: 2 / 3;
+  flex: 0 1 clamp(7rem, 24vw, 11.5rem);
+  aspect-ratio: 600 / 1114;
   background: none; border: 0; padding: 0; cursor: pointer;
   transition: transform .5s cubic-bezier(.22,.68,.24,1), filter .4s ease;
 }
@@ -438,18 +438,17 @@ html.js hr.rule[data-anim].est-vu { scale: 1 1; }
   position: absolute; inset: 0; border-radius: .4rem;
   backface-visibility: hidden; -webkit-backface-visibility: hidden;
   display: flex; align-items: center; justify-content: center;
-  background: linear-gradient(160deg, var(--brun) 0%, var(--noir) 100%);
-  box-shadow: 0 14px 34px -18px rgba(0, 0, 0, .95);
+  background: linear-gradient(158deg, #241b13 0%, #15100b 55%, #0b0806 100%);
+  box-shadow: 0 16px 38px -16px rgba(0, 0, 0, .95), inset 0 0 36px rgba(0, 0, 0, .55);
 }
 .carte-dos .motif { width: 100%; height: 100%; display: block; }
 .carte-face {
   transform: rotateY(180deg);
-  flex-direction: column; gap: .45rem; padding: .75rem;
+  overflow: hidden; padding: 0;
   border: 1px solid rgba(184, 132, 58, .55);
-  background: linear-gradient(160deg, #241a12 0%, #120d09 100%);
+  background: var(--noir);
 }
-.carte-face .num { font-family: var(--font-display); font-style: normal; font-size: clamp(1.1rem, 3.2vw, 1.6rem); color: var(--or); letter-spacing: .06em; }
-.carte-face .nom { font-family: var(--font-display); font-weight: 400; font-size: clamp(.78rem, 2.1vw, .98rem); color: var(--or-pale); line-height: 1.25; text-align: center; }
+.carte-face img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .carte.est-tiree { cursor: default; }
 .tirage:has(.est-tiree) .carte:not(.est-tiree) { opacity: .4; filter: saturate(.4); pointer-events: none; }
 .tirage-invite { margin-top: 1.5rem; font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gris); }
@@ -485,3 +484,21 @@ html.js hr.rule[data-anim].est-vu { scale: 1 1; }
 .post-vignette img { display: block; width: 100%; height: 11rem; object-fit: cover; transition: transform 1s cubic-bezier(.22,.68,.24,1); }
 .post-card:hover .post-vignette img { transform: scale(1.05); }
 @media (prefers-reduced-motion: reduce) { .post-card:hover .post-vignette img { transform: none; } }
+
+/* ---------- Fond vidéo de la section tirage ----------
+   La vidéo ne se charge que sur grand écran, et seulement quand la section
+   arrive à l'écran : voir main.js. Sur téléphone, en mouvement réduit ou en
+   économiseur de données, la section garde son fond uni, comme avant. */
+.section-tirage > .wrap { position: relative; z-index: 1; }
+.tirage-fond { position: absolute; inset: 0; overflow: hidden; z-index: 0; }
+.tirage-fond video {
+  width: 100%; height: 100%; object-fit: cover;
+  opacity: 0; transition: opacity 1.6s ease;
+}
+.tirage-fond video.est-visible { opacity: .5; }
+.tirage-fond::after {
+  content: ""; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(14,11,8,.62) 0%, rgba(14,11,8,.88) 68%, var(--noir-2) 100%),
+    linear-gradient(to bottom, var(--noir-2), transparent 18%, transparent 82%, var(--noir-2));
+}

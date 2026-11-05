@@ -129,10 +129,25 @@
 
     var vigie = new IntersectionObserver(function (entrees) {
       entrees.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add('est-vu'); vigie.unobserve(e.target); }
+        // On révèle aussi ce qui est DÉJÀ passé au-dessus de l'écran : sinon,
+        // un saut direct en bas de page (touche Fin, glissement de l'ascenseur)
+        // laisse invisibles tous les blocs survolés d'un coup.
+        if (e.isIntersecting || e.boundingClientRect.top < 0) {
+          e.target.classList.add('est-vu');
+          vigie.unobserve(e.target);
+        }
       });
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
     cibles.forEach(function (el) { vigie.observe(el); });
+
+    // Filet de sécurité : au cas où un bloc échapperait quand même à la vigie.
+    window.addEventListener('load', function () {
+      window.setTimeout(function () {
+        cibles.forEach(function (el) {
+          if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('est-vu');
+        });
+      }, 400);
+    });
   }
 
   /* ---- Entrée du héros ---- */
@@ -216,43 +231,131 @@
     compteurs.forEach(function (el) { vigiePrix.observe(el); });
   }
 
-  /* ---- Tirage : trois cartes, une seule se retourne ---- */
+  /* ---- Fond vidéo de la section tirage ----
+     Une vidéo d'ambiance n'est jamais indispensable : on ne la sert qu'aux
+     écrans larges, hors mouvement réduit et hors économiseur de données, et
+     uniquement quand la section arrive à l'écran. Ailleurs, fond uni. */
+  var fond = document.querySelector('[data-video-fond]');
+  if (fond && 'IntersectionObserver' in window) {
+    var reseau = navigator.connection || {};
+    var lent = reseau.saveData === true || /2g/.test(reseau.effectiveType || '');
+    var large = window.matchMedia('(min-width: 980px)').matches;
+
+    if (large && !sobre && !lent) {
+      var base = fond.getAttribute('data-video-fond');
+      var guetFond = new IntersectionObserver(function (entrees) {
+        if (!entrees[0].isIntersecting) return;
+        guetFond.disconnect();
+        fond.poster = base + '-poster.webp';
+        // Deux formats : le navigateur n'en télécharge qu'un, le premier qu'il
+        // sait lire. WebM d'abord (plus léger), MP4 pour Safari et les autres.
+        [['.webm', 'video/webm'], ['.mp4', 'video/mp4']].forEach(function (f) {
+          var s = document.createElement('source');
+          s.src = base + f[0];
+          s.type = f[1];
+          fond.appendChild(s);
+        });
+        // preload="none" : il faut demander explicitement le chargement, puis
+        // attendre d'avoir une image avant de lancer la lecture.
+        fond.load();
+        fond.addEventListener('loadeddata', function () {
+          fond.classList.add('est-visible');   // au pire, l'image fixe s'affiche
+          var lecture = fond.play();
+          if (lecture && lecture.catch) lecture.catch(function () {});
+        }, { once: true });
+        // Si aucun des deux formats n'est lisible, on reste sur le fond uni
+        // plutôt que d'afficher un rectangle vide.
+        window.setTimeout(function () {
+          if (fond.readyState < 2) fond.classList.remove('est-visible');
+        }, 6000);
+      }, { rootMargin: '300px' });
+      guetFond.observe(fond);
+    }
+  }
+
+  /* ---- Tirage : trois cartes du jeu de Natacha, une seule se retourne ---- */
   var tirage = document.querySelector('[data-tirage]');
   if (tirage) {
     var source = document.querySelector('script[data-arcanes]');
     var arcanes = [];
     try { arcanes = JSON.parse(source.textContent); } catch (e) { arcanes = []; }
+
     var cartes = [].slice.call(tirage.querySelectorAll('.carte'));
     var suite = document.querySelector('[data-tirage-suite]');
     var invite = document.querySelector('[data-tirage-invite]');
     var relancer = document.querySelector('[data-tirage-reset]');
+    var visible = false;
+
+    var urlCarte = function (id, largeur) { return '/assets/cartes/' + id + '-' + largeur + '.webp'; };
 
     var distribuer = function () {
       var pioche = arcanes.slice();
       cartes.forEach(function (c) {
         var a = pioche.splice(Math.floor(Math.random() * pioche.length), 1)[0];
         if (!a) return;
-        c.querySelector('.num').textContent = a.num;
-        c.querySelector('.nom').textContent = a.nom;
+        c.dataset.id = a.id;
+        c.dataset.nom = a.nom;
+        c.dataset.num = a.num;
+        var img = c.querySelector('.carte-face img');
+        img.removeAttribute('src');
+        img.removeAttribute('srcset');
+        img.alt = '';
         c.classList.remove('est-tiree');
         c.disabled = false;
       });
       if (suite) suite.hidden = true;
       if (invite) invite.hidden = false;
+      if (visible) precharger();
+    };
+
+    // On choisit la largeur nous-mêmes plutôt qu'avec un srcset : sur un téléphone
+    // à forte densité, le navigateur prendrait la grande image alors que la carte
+    // ne fait que 160 pixels de large à l'écran. 340 px y est déjà deux fois plus
+    // fin que nécessaire, pour un tiers du poids.
+    var largeurCarte = function () {
+      var grand = window.matchMedia('(min-width: 980px)').matches;
+      return (grand && window.devicePixelRatio > 1.5) ? 620 : 340;
+    };
+
+    // On ne télécharge les trois cartes distribuées qu'une fois la section à l'écran.
+    var precharger = function () {
+      var w = largeurCarte();
+      cartes.forEach(function (c) {
+        if (!c.dataset.id) return;
+        var i = new Image();
+        i.src = urlCarte(c.dataset.id, w);
+      });
+    };
+
+    var reveler = function (c) {
+      var img = c.querySelector('.carte-face img');
+      img.src = urlCarte(c.dataset.id, largeurCarte());
+      img.alt = c.dataset.num + ' — ' + c.dataset.nom;
+      c.classList.add('est-tiree');
+      cartes.forEach(function (autre) { if (autre !== c) autre.disabled = true; });
+      if (invite) invite.hidden = true;
+      window.setTimeout(function () { if (suite) suite.hidden = false; }, sobre ? 0 : 700);
     };
 
     cartes.forEach(function (c) {
       c.addEventListener('click', function () {
         if (tirage.querySelector('.est-tiree')) return;
-        c.classList.add('est-tiree');
-        cartes.forEach(function (autre) { if (autre !== c) autre.disabled = true; });
-        if (invite) invite.hidden = true;
-        window.setTimeout(function () { if (suite) suite.hidden = false; }, sobre ? 0 : 650);
+        reveler(c);
       });
     });
 
     if (relancer) relancer.addEventListener('click', distribuer);
     distribuer();
+
+    if ('IntersectionObserver' in window) {
+      var guet = new IntersectionObserver(function (entrees) {
+        if (!entrees[0].isIntersecting) return;
+        visible = true; precharger(); guet.disconnect();
+      }, { rootMargin: '200px' });
+      guet.observe(tirage);
+    } else {
+      visible = true; precharger();
+    }
   }
 
 })();
