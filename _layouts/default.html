@@ -51,16 +51,24 @@
     { "@type": "City", "name": "Nyon" },
     { "@type": "City", "name": "Rolle" },
     { "@type": "City", "name": "Morges" },
-    { "@type": "City", "name": "Lausanne" }
+    { "@type": "City", "name": "Lausanne" },
+    { "@type": "AdministrativeArea", "name": "Canton de Genève" },
+    { "@type": "AdministrativeArea", "name": "Canton de Vaud" },
+    { "@type": "AdministrativeArea", "name": "Arc lémanique" }
   ],
   "availableLanguage": ["fr", "en", "de"],
-  "priceRange": "CHF 50–1000",
+  "priceRange": "CHF 35–1000",
   "currenciesAccepted": "CHF",
-  "founder": { "@type": "Person", "name": "Natacha Laure" }
+  "founder": { "@type": "Person", "name": "Natacha Laure" },
+  "address": { "@type": "PostalAddress", "addressCountry": "CH" },
+  "email": "contact@tarot-events.ch",
+  "knowsLanguage": ["fr", "en", "de"]
 }
 </script>
 </head>
-<body>
+{%- assign avec_hero = false -%}
+{%- if content contains '<div class="hero">' -%}{%- assign avec_hero = true -%}{%- endif -%}
+<body{% if avec_hero %} class="avec-hero"{% endif %}>
 
 {% include header.html %}
 

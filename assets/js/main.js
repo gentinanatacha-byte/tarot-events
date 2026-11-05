@@ -8,7 +8,7 @@
 
   function syncNav() {
     if (!toggle || !nav) return;
-    if (window.matchMedia('(max-width: 900px)').matches) {
+    if (window.matchMedia('(max-width: 1024px)').matches) {
       if (!nav.hasAttribute('data-init')) {
         nav.hidden = true;
         nav.setAttribute('data-init', '1');
@@ -29,11 +29,23 @@
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
     nav.addEventListener('click', function (e) {
-      if (e.target.tagName === 'A' && window.matchMedia('(max-width: 900px)').matches) {
+      if (e.target.tagName === 'A' && window.matchMedia('(max-width: 1024px)').matches) {
         nav.hidden = true;
         toggle.setAttribute('aria-expanded', 'false');
       }
     });
+  }
+
+  /* ---- En-tête transparent posé sur le héros, solide dès qu'on défile ---- */
+  if (document.body.classList.contains('avec-hero')) {
+    var entete = document.querySelector('.site-header');
+    if (entete) {
+      var majEntete = function () {
+        entete.classList.toggle('est-solide', window.scrollY > 40);
+      };
+      majEntete();
+      window.addEventListener('scroll', majEntete, { passive: true });
+    }
   }
 
   /* ---- Envoi des formulaires en AJAX, sans quitter la page ---- */

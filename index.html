@@ -6,14 +6,12 @@ permalink: /
 title: "Animation tarot pour vos événements"
 seo_title: "Animation tarot pour événements — Genève & arc lémanique"
 meta_desc: "Animation de tarot pour vos soirées d'entreprise, mariages et événements privés, de Genève à Lausanne. Dès 650 CHF les deux heures. Consultations à distance également."
-image: /assets/images/natacha-animation.jpg
+image: /assets/images/natacha-animation-1000.webp
 ---
 
 <div class="hero">
   <div class="hero-media">
-    <img src="/assets/images/natacha-animation.jpg"
-         alt="Natacha Laure lisant le tarot pour une invitée lors d'une soirée, table dressée et guirlandes lumineuses"
-         width="1000" height="1333" fetchpriority="high">
+    {% include img.html name="natacha-animation" alt="Natacha Laure lisant le tarot pour une invitée lors d'une soirée, table dressée et guirlandes lumineuses" sizes="100vw" priority=true %}
   </div>
   <div class="hero-body wrap">
     <p class="eyebrow">Genève · Nyon · Morges · Lausanne</p>
@@ -41,9 +39,7 @@ image: /assets/images/natacha-animation.jpg
       <p><a class="btn" href="/a-propos/">Mon parcours</a></p>
     </div>
     <div>
-      <img src="/assets/images/natacha-consultation.jpg"
-           alt="Natacha Laure en consultation, cartes étalées sur la table"
-           width="700" height="980" loading="lazy">
+      {% include img.html name="natacha-consultation" alt="Natacha Laure en consultation, cartes étalées sur la table" sizes="(min-width: 980px) 46vw, 100vw" %}
     </div>
   </div>
 </section>
@@ -64,7 +60,7 @@ image: /assets/images/natacha-animation.jpg
       <div class="card">
         <h3>Consultations à distance</h3>
         <p>Par visio, WhatsApp ou par écrit. Où que vous soyez, sans vous déplacer et sans me recevoir chez vous.</p>
-        <p class="price">Dès 50 CHF</p>
+        <p class="price">Dès 35 CHF</p>
         <a class="card-link" href="/consultations/">Voir les formules →</a>
       </div>
 
@@ -78,6 +74,11 @@ image: /assets/images/natacha-animation.jpg
     </div>
   </div>
 </section>
+
+<div class="bandeau">
+  {% include img.html name="salon-bougies" alt="Salon tamisé dressé pour une consultation : table nappée, bougeoirs et miroir ancien" sizes="100vw" %}
+  <p>Un moment juste, et qu'on se raconte encore le lendemain.</p>
+</div>
 
 <section class="band band-dark">
   <div class="wrap wrap-narrow center">
