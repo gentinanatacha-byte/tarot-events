@@ -1,0 +1,74 @@
+fr:
+  base: ""
+  nav:
+    - { ref: "evenementiel",  url: "/evenementiel/",        label: "Événementiel" }
+    - { ref: "entreprises",   url: "/entreprises-mariages/", label: "Entreprises & mariages" }
+    - { ref: "consultations", url: "/consultations/",        label: "Consultations" }
+    - { ref: "cours",         url: "/cours-de-tarot/",       label: "Cours de tarot" }
+    - { ref: "blog",          url: "/blog/",                 label: "Blog" }
+    - { ref: "apropos",       url: "/a-propos/",             label: "À propos" }
+    - { ref: "contact",       url: "/contact/",              label: "Contact" }
+  communes: "Genève, Nyon, Rolle, Morges, Lausanne et leurs environs"
+  cta_devis: "Demander un devis"
+  menu: "Menu"
+  footer_nav: "Navigation"
+  footer_offre: "L'offre"
+  footer_contact: "Contact"
+  footer_identite: "Identité"
+  legal: "Mentions légales"
+  retour_blog: "Tous les articles"
+  publie: "Publié le"
+  form_envoi: "Envoyer ma demande"
+  form_ok: "Merci, votre demande est partie. Je vous réponds sous 24 heures."
+  form_ko: "L'envoi a échoué. Écrivez-moi directement à contact@tarot-events.ch."
+  form_confid: "Vos informations restent strictement confidentielles et ne servent qu'à établir votre devis."
+
+en:
+  base: "/en"
+  nav:
+    - { ref: "evenementiel",  url: "/en/events/",            label: "Events" }
+    - { ref: "entreprises",   url: "/en/corporate-weddings/", label: "Corporate & weddings" }
+    - { ref: "consultations", url: "/en/readings/",          label: "Readings" }
+    - { ref: "cours",         url: "/en/tarot-lessons/",     label: "Tarot lessons" }
+    - { ref: "blog",          url: "/blog/",                 label: "Blog (FR)" }
+    - { ref: "apropos",       url: "/en/about/",             label: "About" }
+    - { ref: "contact",       url: "/en/contact/",           label: "Contact" }
+  communes: "Geneva, Nyon, Rolle, Morges, Lausanne and the surrounding area"
+  cta_devis: "Request a quote"
+  menu: "Menu"
+  footer_nav: "Navigation"
+  footer_offre: "Services"
+  footer_contact: "Contact"
+  footer_identite: "Legal identity"
+  legal: "Legal notice"
+  retour_blog: "All articles"
+  publie: "Published on"
+  form_envoi: "Send my request"
+  form_ok: "Thank you — your request has been sent. I reply within 24 hours."
+  form_ko: "Sending failed. Please write directly to contact@tarot-events.ch."
+  form_confid: "Your information remains strictly confidential and is used only to prepare your quote."
+
+de:
+  base: "/de"
+  nav:
+    - { ref: "evenementiel",  url: "/de/events/",            label: "Events" }
+    - { ref: "entreprises",   url: "/de/firmen-hochzeiten/", label: "Firmen & Hochzeiten" }
+    - { ref: "consultations", url: "/de/beratungen/",        label: "Beratungen" }
+    - { ref: "cours",         url: "/de/tarot-kurse/",       label: "Tarot-Kurse" }
+    - { ref: "blog",          url: "/blog/",                 label: "Blog (FR)" }
+    - { ref: "apropos",       url: "/de/ueber-mich/",        label: "Über mich" }
+    - { ref: "contact",       url: "/de/kontakt/",           label: "Kontakt" }
+  communes: "Genf, Nyon, Rolle, Morges, Lausanne und Umgebung"
+  cta_devis: "Offerte anfragen"
+  menu: "Menü"
+  footer_nav: "Navigation"
+  footer_offre: "Angebot"
+  footer_contact: "Kontakt"
+  footer_identite: "Impressum"
+  legal: "Impressum"
+  retour_blog: "Alle Artikel"
+  publie: "Veröffentlicht am"
+  form_envoi: "Anfrage senden"
+  form_ok: "Vielen Dank — Ihre Anfrage ist eingegangen. Ich antworte innerhalb von 24 Stunden."
+  form_ko: "Senden fehlgeschlagen. Schreiben Sie bitte direkt an contact@tarot-events.ch."
+  form_confid: "Ihre Angaben bleiben streng vertraulich und dienen ausschliesslich der Erstellung Ihrer Offerte."

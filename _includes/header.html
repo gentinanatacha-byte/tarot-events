@@ -1,0 +1,30 @@
+{% assign L = site.data.i18n[page.lang] %}
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="{{ L.base }}/">Natacha Laure<span>Tarot Events</span></a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu-principal">{{ L.menu }}</button>
+
+    <nav class="main-nav" id="menu-principal" aria-label="{{ L.footer_nav }}">
+      <ul>
+        {%- for item in L.nav %}
+        <li><a href="{{ item.url }}"{% if page.ref == item.ref %} aria-current="page"{% endif %}>{{ item.label }}</a></li>
+        {%- endfor %}
+      </ul>
+    </nav>
+
+    <div class="lang-switch">
+      {%- assign langs = "fr,en,de" | split: "," %}
+      {%- for code in langs %}
+        {%- assign target = "" %}
+        {%- if page.ref %}
+          {%- for p in site.pages %}
+            {%- if p.ref == page.ref and p.lang == code %}{% assign target = p.url %}{% endif %}
+          {%- endfor %}
+        {%- endif %}
+        {%- if target == "" %}{% assign target = site.data.i18n[code].base | append: "/" %}{% endif %}
+        <a href="{{ target }}" hreflang="{{ code }}"{% if page.lang == code %} aria-current="true"{% endif %}>{{ code }}</a>
+      {%- endfor %}
+    </div>
+  </div>
+</header>

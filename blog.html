@@ -1,0 +1,38 @@
+---
+layout: default
+lang: fr
+ref: blog
+permalink: /blog/
+title: "Le journal"
+seo_title: "Le journal — tarot, événements et guidance | Natacha Laure"
+meta_desc: "Articles sur l'animation tarot en événement, le Tarot de Marseille et la consultation à distance, à Genève et sur l'arc lémanique."
+---
+
+<section>
+  <div class="wrap wrap-narrow">
+    <p class="eyebrow">Le journal</p>
+    <h1>Tarot, événements et guidance</h1>
+    <p class="lede">Ce que j'aurais aimé lire avant de confier une animation à quelqu'un, et ce qu'on me demande le plus souvent avant une première consultation.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    {%- if site.posts.size > 0 %}
+    <ul class="post-list">
+      {%- for post in site.posts %}
+      <li>
+        <article class="post-card">
+          <time datetime="{{ post.date | date_to_xmlschema }}">{% include date-fr.html d=post.date %}</time>
+          <h3>{{ post.title }}</h3>
+          <p>{{ post.chapo | default: post.excerpt | strip_html | truncatewords: 30 }}</p>
+          <a class="more" href="{{ post.url }}">Lire l'article →</a>
+        </article>
+      </li>
+      {%- endfor %}
+    </ul>
+    {%- else %}
+    <p class="muted">Les premiers articles arrivent très bientôt.</p>
+    {%- endif %}
+  </div>
+</section>

@@ -1,0 +1,134 @@
+---
+layout: default
+lang: fr
+ref: entreprises
+permalink: /entreprises-mariages/
+title: "Soirées d'entreprise, mariages et séminaires"
+seo_title: "Animation tarot entreprise & mariage — Genève et Vaud"
+meta_desc: "Soirées d'entreprise, séminaires, mariages : animation de tarot sur mesure de Genève à Lausanne. Dès 650 CHF les deux heures. Devis personnalisé sous 24 heures."
+---
+
+<section>
+  <div class="wrap wrap-narrow">
+    <p class="eyebrow">Entreprises &amp; mariages</p>
+    <h1>Soirées d'entreprise, mariages et séminaires</h1>
+    <p class="lede">Chaque événement professionnel est un cas particulier : le nombre d'invité·es, la durée, le lieu et le moment de la soirée changent tout. Je vous réponds sous 24 heures avec une proposition chiffrée.</p>
+    <p style="font-family:var(--font-display);color:var(--or-pale);font-size:1.25rem;margin-top:1.5rem">Dès 650 CHF pour deux heures.</p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap grid grid-2">
+    <div>
+      <h2>En entreprise</h2>
+      <p>Soirée de fin d'année, séminaire, lancement, inauguration, afterwork. L'animation donne à vos équipes un sujet de conversation commun, et elle fonctionne particulièrement bien quand les gens ne se connaissent pas encore.</p>
+      <p>Le ton est ludique et bienveillant : on parle d'intuition, d'élan, de chemin. Jamais de prédiction brutale, jamais rien qui puisse mettre quelqu'un mal à l'aise devant ses collègues.</p>
+    </div>
+    <div>
+      <h2>En mariage</h2>
+      <p>Pendant le cocktail ou en soirée, l'animation occupe élégamment les temps creux — ceux où les invité·es attendent, où les marié·es sont en photo, où la piste n'a pas encore pris.</p>
+      <p>Je m'installe dans un coin à l'écart et je reçois celles et ceux qui le souhaitent. Personne n'est sollicité, tout le monde est bienvenu.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap wrap-narrow">
+    <p class="eyebrow">Parlons de votre événement</p>
+    <h2>Demander un devis</h2>
+    <p class="muted">Quelques informations et je reviens vers vous sous 24 heures avec une proposition adaptée à votre soirée.</p>
+
+    <form class="form-devis" style="margin-top:2.5rem"
+          action="https://formspree.io/f/{{ site.formspree_id }}"
+          method="POST"
+          data-ajax
+          data-ok="{{ site.data.i18n.fr.form_ok }}"
+          data-ko="{{ site.data.i18n.fr.form_ko }}">
+
+      <input type="hidden" name="_subject" value="Devis événementiel — tarot-events.ch">
+      <input type="hidden" name="origine" value="tarot-events.ch · FR · devis">
+      <p style="position:absolute;left:-9999px" aria-hidden="true">
+        <label>Ne pas remplir <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label>
+      </p>
+
+      <div class="form-grid">
+        <div class="field">
+          <label for="type">Type d'événement *</label>
+          <select id="type" name="Type d'événement" required>
+            <option value="">Choisir…</option>
+            <option>Soirée d'entreprise</option>
+            <option>Séminaire</option>
+            <option>Mariage</option>
+            <option>Anniversaire</option>
+            <option>Inauguration / lancement</option>
+            <option>Autre</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="date">Date de l'événement</label>
+          <input type="date" id="date" name="Date">
+        </div>
+
+        <div class="field">
+          <label for="lieu">Lieu (commune) *</label>
+          <input type="text" id="lieu" name="Lieu" required placeholder="Genève, Nyon, Morges…">
+        </div>
+
+        <div class="field">
+          <label for="invites">Nombre d'invité·es *</label>
+          <input type="number" id="invites" name="Nombre d'invités" min="1" required placeholder="40">
+        </div>
+
+        <div class="field">
+          <label for="duree">Durée souhaitée</label>
+          <select id="duree" name="Durée souhaitée">
+            <option value="">Choisir…</option>
+            <option>2 heures</option>
+            <option>3 heures</option>
+            <option>4 heures</option>
+            <option>Plus de 4 heures</option>
+            <option>Je ne sais pas encore</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="budget">Budget envisagé</label>
+          <select id="budget" name="Budget envisagé">
+            <option value="">Choisir…</option>
+            <option>650 – 900 CHF</option>
+            <option>900 – 1 500 CHF</option>
+            <option>Plus de 1 500 CHF</option>
+            <option>À définir ensemble</option>
+          </select>
+        </div>
+
+        <div class="field full">
+          <label for="message">Votre message</label>
+          <textarea id="message" name="Message" placeholder="Le thème de la soirée, le déroulé prévu, vos questions…"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="nom">Votre nom *</label>
+          <input type="text" id="nom" name="Nom" required autocomplete="name">
+        </div>
+
+        <div class="field">
+          <label for="email">Votre e-mail *</label>
+          <input type="email" id="email" name="Email" required autocomplete="email">
+        </div>
+
+        <div class="field">
+          <label for="tel">Téléphone</label>
+          <input type="tel" id="tel" name="Téléphone" autocomplete="tel">
+        </div>
+      </div>
+
+      <p style="margin-top:1.75rem">
+        <button class="btn btn-solid" type="submit">{{ site.data.i18n.fr.form_envoi }}</button>
+      </p>
+      <p class="form-status" role="status" aria-live="polite"></p>
+      <p class="form-note">{{ site.data.i18n.fr.form_confid }}</p>
+    </form>
+  </div>
+</section>

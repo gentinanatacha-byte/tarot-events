@@ -1,0 +1,111 @@
+---
+layout: default
+lang: fr
+ref: accueil
+permalink: /
+title: "Animation tarot pour vos événements"
+seo_title: "Animation tarot pour événements — Genève & arc lémanique"
+meta_desc: "Animation de tarot pour vos soirées d'entreprise, mariages et événements privés, de Genève à Lausanne. Dès 650 CHF les deux heures. Consultations à distance également."
+image: /assets/images/natacha-animation.jpg
+---
+
+<div class="hero">
+  <div class="hero-media">
+    <img src="/assets/images/natacha-animation.jpg"
+         alt="Natacha Laure lisant le tarot pour une invitée lors d'une soirée, table dressée et guirlandes lumineuses"
+         width="1000" height="1333" fetchpriority="high">
+  </div>
+  <div class="hero-body wrap">
+    <p class="eyebrow">Genève · Nyon · Morges · Lausanne</p>
+    <h1>L'art du tarot au service de vos événements</h1>
+    <p class="lede">Des consultations individuelles courtes au Tarot de Marseille, conduites avec discrétion, qui circulent parmi vos invité·es et créent du lien. Un moment dont on reparle encore le lendemain.</p>
+    <ul class="badges">
+      <li>Née à Genève</li>
+      <li>Déplacement inclus de Genève à Lausanne</li>
+      <li>Dès 650 CHF les deux heures</li>
+    </ul>
+    <p style="margin-top:2rem">
+      <a class="btn btn-solid" href="/entreprises-mariages/">Demander un devis</a>
+      <a class="btn" href="/evenementiel/">Voir les formules</a>
+    </p>
+  </div>
+</div>
+
+<section class="band">
+  <div class="wrap split">
+    <div>
+      <p class="eyebrow">Mon parcours</p>
+      <h2>Une histoire de transmission, née ici</h2>
+      <p>Je suis née à Genève. J'ai appris les cartes aux côtés de ma grand-mère, médium reconnue dans cette ville, qui m'a transmis l'écoute des énergies et l'amour du Tarot de Marseille.</p>
+      <p>Plus de dix ans et cinq cents consultations plus tard, je reviens exercer sur le bassin lémanique.</p>
+      <p><a class="btn" href="/a-propos/">Mon parcours</a></p>
+    </div>
+    <div>
+      <img src="/assets/images/natacha-consultation.jpg"
+           alt="Natacha Laure en consultation, cartes étalées sur la table"
+           width="700" height="980" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Trois façons de travailler ensemble</p>
+    <h2>Ce que je propose</h2>
+    <div class="grid grid-3" style="margin-top:2.5rem">
+
+      <div class="card">
+        <h3>Vos événements</h3>
+        <p>Soirées d'entreprise, mariages, anniversaires. Une animation élégante qui rassemble vos invité·es au lieu de les disperser.</p>
+        <p class="price">Dès 650 CHF</p>
+        <a class="card-link" href="/evenementiel/">Découvrir les formules →</a>
+      </div>
+
+      <div class="card">
+        <h3>Consultations à distance</h3>
+        <p>Par visio, WhatsApp ou par écrit. Où que vous soyez, sans vous déplacer et sans me recevoir chez vous.</p>
+        <p class="price">Dès 50 CHF</p>
+        <a class="card-link" href="/consultations/">Voir les formules →</a>
+      </div>
+
+      <div class="card">
+        <h3>Apprendre le tarot</h3>
+        <p>Cours particuliers en visio, du premier pas à la lecture autonome. Pour débutant·e complet·ète comme pour pratique à affiner.</p>
+        <p class="price">Dès 110 CHF</p>
+        <a class="card-link" href="/cours-de-tarot/">Voir les cours →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="band band-dark">
+  <div class="wrap wrap-narrow center">
+    <p class="eyebrow">Ma règle</p>
+    <h2>Éclairer sans enfermer, guider sans jamais imposer</h2>
+    <p class="lede">Je travaille au Tarot de Marseille, avec une seule exigence : la bienveillance. Pas de prédiction brutale, pas de mise en scène inquiétante. Un moment juste, personnel, et qu'on se raconte encore le lendemain.</p>
+    <p style="margin-top:2rem"><a class="btn" href="/entreprises-mariages/">Parler de votre projet</a></p>
+  </div>
+</section>
+
+{% assign derniers = site.posts | slice: 0, 3 %}
+{% if derniers.size > 0 %}
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Le journal</p>
+    <h2>Derniers articles</h2>
+    <ul class="post-list" style="margin-top:2.5rem">
+      {%- for post in derniers %}
+      <li>
+        <article class="post-card">
+          <time datetime="{{ post.date | date_to_xmlschema }}">{% include date-fr.html d=post.date %}</time>
+          <h3>{{ post.title }}</h3>
+          <p>{{ post.chapo | default: post.excerpt | strip_html | truncatewords: 24 }}</p>
+          <a class="more" href="{{ post.url }}">Lire →</a>
+        </article>
+      </li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>
+{% endif %}

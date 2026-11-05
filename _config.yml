@@ -1,0 +1,72 @@
+title: "Natacha Laure · Tarot Events"
+tagline: "Animation tarot pour vos événements — Genève & arc lémanique"
+description: >-
+  Animation de tarot pour soirées d'entreprise, mariages et événements privés,
+  de Genève à Lausanne. Consultations à distance et cours de Tarot de Marseille.
+url: "https://tarot-events.ch"
+baseurl: ""
+lang: fr
+
+# ───────────────────────────────────────────────────────────────
+# LA SEULE LIGNE À CHANGER TOI-MÊME
+# Identifiant du 2e formulaire Formspree (la partie après /f/).
+# Elle alimente les deux formulaires du site, dans les trois langues.
+formspree_id: "xaeekdoz"
+# ───────────────────────────────────────────────────────────────
+
+contact:
+  email: "natachalaure.voyance@gmail.com"
+  zone: "de Genève à Lausanne"
+  communes: "Genève, Nyon, Rolle, Morges, Lausanne et leurs environs"
+
+tarifs:
+  evenementiel_des: 650
+  tenue_theme: 50
+  ecrit: 50
+  visio_30: 60
+  visio_60: 100
+  visio_90: 140
+  duo_60: 140
+  cours_90: 110
+  cours_cycle: 380
+  cours_journee: 190
+
+langues:
+  - code: fr
+    nom: "Français"
+    prefixe: ""
+  - code: en
+    nom: "English"
+    prefixe: "/en"
+  - code: de
+    nom: "Deutsch"
+    prefixe: "/de"
+
+plugins:
+  - jekyll-sitemap
+
+collections:
+  posts:
+    output: true
+    permalink: /blog/:title/
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      lang: "fr"
+
+include:
+  - CNAME
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - node_modules
+  - .gitignore
+  - "LISEZ-MOI*.md"
+  - "A-LIRE*.md"

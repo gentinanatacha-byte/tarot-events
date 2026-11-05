@@ -1,0 +1,78 @@
+---
+layout: default
+lang: fr
+ref: contact
+permalink: /contact/
+title: "Contact"
+seo_title: "Contact — Natacha Laure · Tarot Events, Genève & arc lémanique"
+meta_desc: "Un événement à organiser, une consultation à réserver, une question avant de vous lancer. Réponse sous 24 heures."
+---
+
+<section>
+  <div class="wrap wrap-narrow">
+    <p class="eyebrow">Écrivez-moi</p>
+    <h1>Parlons de votre projet</h1>
+    <p class="lede">Un événement à organiser, une consultation à réserver, une question avant de vous lancer. Je réponds sous 24 heures.</p>
+
+    <form style="margin-top:2.5rem"
+          action="https://formspree.io/f/{{ site.formspree_id }}"
+          method="POST"
+          data-ajax
+          data-ok="{{ site.data.i18n.fr.form_ok }}"
+          data-ko="{{ site.data.i18n.fr.form_ko }}">
+
+      <input type="hidden" name="_subject" value="Message — tarot-events.ch">
+      <input type="hidden" name="origine" value="tarot-events.ch · FR · contact">
+      <p style="position:absolute;left:-9999px" aria-hidden="true">
+        <label>Ne pas remplir <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label>
+      </p>
+
+      <div class="form-grid">
+        <div class="field">
+          <label for="c-nom">Votre nom *</label>
+          <input type="text" id="c-nom" name="Nom" required autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="c-email">Votre e-mail *</label>
+          <input type="email" id="c-email" name="Email" required autocomplete="email">
+        </div>
+        <div class="field full">
+          <label for="c-sujet">Sujet</label>
+          <select id="c-sujet" name="Sujet">
+            <option value="">Choisir…</option>
+            <option>Animation d'un événement</option>
+            <option>Consultation à distance</option>
+            <option>Cours de tarot</option>
+            <option>Autre question</option>
+          </select>
+        </div>
+        <div class="field full">
+          <label for="c-message">Votre message *</label>
+          <textarea id="c-message" name="Message" required></textarea>
+        </div>
+      </div>
+
+      <p style="margin-top:1.75rem">
+        <button class="btn btn-solid" type="submit">Envoyer</button>
+      </p>
+      <p class="form-status" role="status" aria-live="polite"></p>
+      <p class="form-note">{{ site.data.i18n.fr.form_confid }}</p>
+    </form>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap wrap-narrow">
+    <h2>Mes coordonnées</h2>
+    <p class="identite">
+      <strong>Natacha Gentina</strong><br>
+      Natacha Laure · Tarot Events<br>
+      <a href="mailto:contact@tarot-events.ch">contact@tarot-events.ch</a><br>
+      <!-- ===== À COMPLÉTER AVANT MISE EN LIGNE =====
+           La LCD (art. 3 al. 1 let. s) exige une adresse de contact claire et complète.
+           Un formulaire seul ne suffit pas. Remplace la ligne ci-dessous. -->
+      [adresse de contact à compléter]
+    </p>
+    <p class="muted" style="margin-top:1.5rem">Zone d'intervention pour l'événementiel : {{ site.data.i18n.fr.communes }}. Au-delà, sur devis.</p>
+  </div>
+</section>

@@ -1,0 +1,77 @@
+---
+layout: default
+lang: en
+ref: entreprises
+permalink: /en/corporate-weddings/
+title: "Corporate events, weddings and seminars"
+seo_title: "Tarot entertainment for corporate events and weddings — Geneva & Vaud"
+meta_desc: "Corporate evenings, seminars, weddings: bespoke tarot entertainment from Geneva to Lausanne. From CHF 650 for two hours. Tailored quote within 24 hours."
+---
+
+<section>
+  <div class="wrap wrap-narrow">
+    <p class="eyebrow">Corporate &amp; weddings</p>
+    <h1>Corporate events, weddings and seminars</h1>
+    <p class="lede">Every professional event is a particular case: the number of guests, the length, the venue and the moment in the evening all change things. I reply within 24 hours with a costed proposal.</p>
+    <p style="font-family:var(--font-display);color:var(--or-pale);font-size:1.25rem;margin-top:1.5rem">From CHF 650 for two hours.</p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap grid grid-2">
+    <div>
+      <h2>For companies</h2>
+      <p>Year-end party, seminar, launch, opening, after-work. The entertainment gives your teams a shared subject of conversation, and works particularly well when people do not yet know each other.</p>
+      <p>The tone is light and generous: we talk about intuition, momentum, direction. Never a blunt prediction, never anything that could leave someone uncomfortable in front of colleagues.</p>
+    </div>
+    <div>
+      <h2>For weddings</h2>
+      <p>During the cocktail hour or later in the evening, the entertainment elegantly fills the quiet stretches — when guests are waiting, when the couple is away for photographs, when the dance floor has not yet taken off.</p>
+      <p>I set up in a quiet corner and receive whoever wishes to come. Nobody is approached, everybody is welcome.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap wrap-narrow">
+    <p class="eyebrow">Tell me about your event</p>
+    <h2>Request a quote</h2>
+    <p class="muted">A few details and I will come back to you within 24 hours with a proposal suited to your evening.</p>
+
+    <form style="margin-top:2.5rem" action="https://formspree.io/f/{{ site.formspree_id }}" method="POST" data-ajax
+          data-ok="{{ site.data.i18n.en.form_ok }}" data-ko="{{ site.data.i18n.en.form_ko }}">
+      <input type="hidden" name="_subject" value="Quote request — tarot-events.ch (EN)">
+      <input type="hidden" name="origine" value="tarot-events.ch · EN · quote">
+      <p style="position:absolute;left:-9999px" aria-hidden="true"><label>Do not fill <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></p>
+
+      <div class="form-grid">
+        <div class="field">
+          <label for="e-type">Type of event *</label>
+          <select id="e-type" name="Type of event" required>
+            <option value="">Choose…</option><option>Corporate evening</option><option>Seminar</option>
+            <option>Wedding</option><option>Birthday</option><option>Launch / opening</option><option>Other</option>
+          </select>
+        </div>
+        <div class="field"><label for="e-date">Date</label><input type="date" id="e-date" name="Date"></div>
+        <div class="field"><label for="e-lieu">Location (town) *</label><input type="text" id="e-lieu" name="Location" required placeholder="Geneva, Nyon, Morges…"></div>
+        <div class="field"><label for="e-inv">Number of guests *</label><input type="number" id="e-inv" name="Number of guests" min="1" required placeholder="40"></div>
+        <div class="field">
+          <label for="e-dur">Preferred duration</label>
+          <select id="e-dur" name="Duration"><option value="">Choose…</option><option>2 hours</option><option>3 hours</option><option>4 hours</option><option>More than 4 hours</option><option>Not decided yet</option></select>
+        </div>
+        <div class="field">
+          <label for="e-bud">Budget in mind</label>
+          <select id="e-bud" name="Budget"><option value="">Choose…</option><option>CHF 650 – 900</option><option>CHF 900 – 1,500</option><option>More than CHF 1,500</option><option>To be discussed</option></select>
+        </div>
+        <div class="field full"><label for="e-msg">Your message</label><textarea id="e-msg" name="Message" placeholder="The theme of the evening, the planned schedule, your questions…"></textarea></div>
+        <div class="field"><label for="e-nom">Your name *</label><input type="text" id="e-nom" name="Name" required autocomplete="name"></div>
+        <div class="field"><label for="e-mail">Your email *</label><input type="email" id="e-mail" name="Email" required autocomplete="email"></div>
+        <div class="field"><label for="e-tel">Phone</label><input type="tel" id="e-tel" name="Phone" autocomplete="tel"></div>
+      </div>
+
+      <p style="margin-top:1.75rem"><button class="btn btn-solid" type="submit">{{ site.data.i18n.en.form_envoi }}</button></p>
+      <p class="form-status" role="status" aria-live="polite"></p>
+      <p class="form-note">{{ site.data.i18n.en.form_confid }}</p>
+    </form>
+  </div>
+</section>

@@ -1,0 +1,25 @@
+---
+layout: default
+---
+{% assign L = site.data.i18n[page.lang] %}
+<article>
+  <section class="wrap wrap-narrow">
+    <p class="post-meta">{{ L.publie }} {% include date-fr.html d=page.date %}</p>
+    <h1>{{ page.title }}</h1>
+    {% if page.chapo %}<p class="lede">{{ page.chapo }}</p>{% endif %}
+    <hr class="rule">
+    <div class="post-body">
+      {{ content }}
+    </div>
+
+    <hr class="rule" style="margin-top:3rem">
+    <p class="muted" style="font-size:.9rem">
+      Natacha Laure — tarologue née à Genève. Animation d'événements de Genève à Lausanne,
+      consultations à distance et cours de Tarot de Marseille.
+    </p>
+    <p>
+      <a class="btn" href="/evenementiel/">Voir l'animation événementielle</a>
+      <a class="btn" href="/blog/">{{ L.retour_blog }}</a>
+    </p>
+  </section>
+</article>

@@ -1,0 +1,54 @@
+---
+layout: default
+lang: en
+ref: contact
+permalink: /en/contact/
+title: "Contact"
+seo_title: "Contact — Natacha Laure · Tarot Events, Geneva & Lake Geneva region"
+meta_desc: "An event to organise, a reading to book, a question before you start. Reply within 24 hours."
+---
+
+<section>
+  <div class="wrap wrap-narrow">
+    <p class="eyebrow">Write to me</p>
+    <h1>Let's talk about your project</h1>
+    <p class="lede">An event to organise, a reading to book, a question before you start. I reply within 24 hours.</p>
+
+    <form style="margin-top:2.5rem" action="https://formspree.io/f/{{ site.formspree_id }}" method="POST" data-ajax
+          data-ok="{{ site.data.i18n.en.form_ok }}" data-ko="{{ site.data.i18n.en.form_ko }}">
+      <input type="hidden" name="_subject" value="Message — tarot-events.ch (EN)">
+      <input type="hidden" name="origine" value="tarot-events.ch · EN · contact">
+      <p style="position:absolute;left:-9999px" aria-hidden="true"><label>Do not fill <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></p>
+
+      <div class="form-grid">
+        <div class="field"><label for="ec-nom">Your name *</label><input type="text" id="ec-nom" name="Name" required autocomplete="name"></div>
+        <div class="field"><label for="ec-mail">Your email *</label><input type="email" id="ec-mail" name="Email" required autocomplete="email"></div>
+        <div class="field full">
+          <label for="ec-suj">Subject</label>
+          <select id="ec-suj" name="Subject"><option value="">Choose…</option><option>Event entertainment</option><option>Reading at a distance</option><option>Tarot lessons</option><option>Other question</option></select>
+        </div>
+        <div class="field full"><label for="ec-msg">Your message *</label><textarea id="ec-msg" name="Message" required></textarea></div>
+      </div>
+
+      <p style="margin-top:1.75rem"><button class="btn btn-solid" type="submit">Send</button></p>
+      <p class="form-status" role="status" aria-live="polite"></p>
+      <p class="form-note">{{ site.data.i18n.en.form_confid }}</p>
+    </form>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap wrap-narrow">
+    <h2>My details</h2>
+    <p class="identite">
+      <strong>Natacha Gentina</strong><br>
+      Natacha Laure · Tarot Events<br>
+      <a href="mailto:contact@tarot-events.ch">contact@tarot-events.ch</a><br>
+      <!-- ===== TO BE COMPLETED BEFORE GOING LIVE =====
+           Swiss law (UCA art. 3 para. 1 let. s) requires a clear and complete
+           contact address. A contact form alone is not sufficient. -->
+      [contact address to be completed]
+    </p>
+    <p class="muted" style="margin-top:1.5rem">Event coverage: {{ site.data.i18n.en.communes }}. Beyond that, on request.</p>
+  </div>
+</section>

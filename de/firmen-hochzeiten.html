@@ -1,0 +1,77 @@
+---
+layout: default
+lang: de
+ref: entreprises
+permalink: /de/firmen-hochzeiten/
+title: "Firmenanlässe, Hochzeiten und Seminare"
+seo_title: "Tarot-Animation für Firmenanlässe und Hochzeiten — Genf & Waadt"
+meta_desc: "Firmenanlässe, Seminare, Hochzeiten: massgeschneiderte Tarot-Animation von Genf bis Lausanne. Ab CHF 650 für zwei Stunden. Persönliche Offerte innerhalb von 24 Stunden."
+---
+
+<section>
+  <div class="wrap wrap-narrow">
+    <p class="eyebrow">Firmen &amp; Hochzeiten</p>
+    <h1>Firmenanlässe, Hochzeiten und Seminare</h1>
+    <p class="lede">Jeder Anlass ist ein Einzelfall: Gästezahl, Dauer, Ort und Zeitpunkt im Abendverlauf verändern alles. Ich antworte innerhalb von 24 Stunden mit einem bezifferten Vorschlag.</p>
+    <p style="font-family:var(--font-display);color:var(--or-pale);font-size:1.25rem;margin-top:1.5rem">Ab CHF 650 für zwei Stunden.</p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap grid grid-2">
+    <div>
+      <h2>Für Unternehmen</h2>
+      <p>Jahresabschluss, Seminar, Lancierung, Eröffnung, Afterwork. Die Animation gibt Ihren Teams ein gemeinsames Gesprächsthema und wirkt besonders gut, wenn sich die Leute noch nicht kennen.</p>
+      <p>Der Ton ist leicht und wohlwollend: Es geht um Intuition, Schwung, Richtung. Nie eine harsche Vorhersage, nie etwas, das jemanden vor Kolleginnen und Kollegen in Verlegenheit bringt.</p>
+    </div>
+    <div>
+      <h2>Für Hochzeiten</h2>
+      <p>Während des Apéros oder am Abend füllt die Animation elegant die ruhigen Phasen — wenn die Gäste warten, das Brautpaar beim Fotografieren ist, die Tanzfläche noch zögert.</p>
+      <p>Ich richte mich in einer ruhigen Ecke ein und empfange, wer möchte. Niemand wird angesprochen, alle sind willkommen.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap wrap-narrow">
+    <p class="eyebrow">Erzählen Sie mir von Ihrem Anlass</p>
+    <h2>Offerte anfragen</h2>
+    <p class="muted">Einige Angaben, und ich melde mich innerhalb von 24 Stunden mit einem passenden Vorschlag.</p>
+
+    <form style="margin-top:2.5rem" action="https://formspree.io/f/{{ site.formspree_id }}" method="POST" data-ajax
+          data-ok="{{ site.data.i18n.de.form_ok }}" data-ko="{{ site.data.i18n.de.form_ko }}">
+      <input type="hidden" name="_subject" value="Offertanfrage — tarot-events.ch (DE)">
+      <input type="hidden" name="origine" value="tarot-events.ch · DE · offerte">
+      <p style="position:absolute;left:-9999px" aria-hidden="true"><label>Nicht ausfüllen <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></p>
+
+      <div class="form-grid">
+        <div class="field">
+          <label for="d-type">Art des Anlasses *</label>
+          <select id="d-type" name="Art des Anlasses" required>
+            <option value="">Wählen…</option><option>Firmenanlass</option><option>Seminar</option>
+            <option>Hochzeit</option><option>Geburtstag</option><option>Lancierung / Eröffnung</option><option>Anderes</option>
+          </select>
+        </div>
+        <div class="field"><label for="d-date">Datum</label><input type="date" id="d-date" name="Datum"></div>
+        <div class="field"><label for="d-ort">Ort (Gemeinde) *</label><input type="text" id="d-ort" name="Ort" required placeholder="Genf, Nyon, Morges…"></div>
+        <div class="field"><label for="d-gaeste">Anzahl Gäste *</label><input type="number" id="d-gaeste" name="Anzahl Gäste" min="1" required placeholder="40"></div>
+        <div class="field">
+          <label for="d-dauer">Gewünschte Dauer</label>
+          <select id="d-dauer" name="Dauer"><option value="">Wählen…</option><option>2 Stunden</option><option>3 Stunden</option><option>4 Stunden</option><option>Mehr als 4 Stunden</option><option>Noch offen</option></select>
+        </div>
+        <div class="field">
+          <label for="d-budget">Vorgesehenes Budget</label>
+          <select id="d-budget" name="Budget"><option value="">Wählen…</option><option>CHF 650 – 900</option><option>CHF 900 – 1'500</option><option>Mehr als CHF 1'500</option><option>Noch zu besprechen</option></select>
+        </div>
+        <div class="field full"><label for="d-msg">Ihre Nachricht</label><textarea id="d-msg" name="Nachricht" placeholder="Motto des Abends, geplanter Ablauf, Ihre Fragen…"></textarea></div>
+        <div class="field"><label for="d-name">Ihr Name *</label><input type="text" id="d-name" name="Name" required autocomplete="name"></div>
+        <div class="field"><label for="d-mail">Ihre E-Mail *</label><input type="email" id="d-mail" name="Email" required autocomplete="email"></div>
+        <div class="field"><label for="d-tel">Telefon</label><input type="tel" id="d-tel" name="Telefon" autocomplete="tel"></div>
+      </div>
+
+      <p style="margin-top:1.75rem"><button class="btn btn-solid" type="submit">{{ site.data.i18n.de.form_envoi }}</button></p>
+      <p class="form-status" role="status" aria-live="polite"></p>
+      <p class="form-note">{{ site.data.i18n.de.form_confid }}</p>
+    </form>
+  </div>
+</section>
