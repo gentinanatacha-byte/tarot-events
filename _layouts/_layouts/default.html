@@ -1,0 +1,86 @@
+---
+---
+{% assign L = site.data.i18n[page.lang] %}<!doctype html>
+<html lang="{{ page.lang }}">
+<head>
+<meta charset="utf-8">
+<script>document.documentElement.className+=" js";</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }} — {{ site.title }}{% endif %}</title>
+<meta name="description" content="{{ page.meta_desc | default: site.description | strip_newlines | strip }}">
+<link rel="canonical" href="{{ page.url | absolute_url }}">
+
+{%- if page.ref %}
+  {%- for p in site.pages %}
+    {%- if p.ref == page.ref and p.lang %}
+<link rel="alternate" hreflang="{{ p.lang }}" href="{{ p.url | absolute_url }}">
+    {%- endif %}
+  {%- endfor %}
+  {%- for p in site.pages %}
+    {%- if p.ref == page.ref and p.lang == 'fr' %}
+<link rel="alternate" hreflang="x-default" href="{{ p.url | absolute_url }}">
+    {%- endif %}
+  {%- endfor %}
+{%- endif %}
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="{{ page.lang }}">
+<meta property="og:site_name" content="{{ site.title }}">
+<meta property="og:title" content="{% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}">
+<meta property="og:description" content="{{ page.meta_desc | default: site.description | strip_newlines | strip }}">
+<meta property="og:url" content="{{ page.url | absolute_url }}">
+{%- assign og = page.image %}
+{%- if page.illustration %}{% assign im = site.data.images[page.illustration] %}{% capture og %}/assets/images/{{ page.illustration }}-{{ im.w }}.webp{% endcapture %}{% endif %}
+{%- if og %}
+<meta property="og:image" content="{{ og | absolute_url }}">
+{%- endif %}
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="/assets/images/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Raleway:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="/assets/css/styles.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Natacha Laure · Tarot Events",
+  "url": "{{ site.url }}",
+  "description": "Animation de tarot pour événements d'entreprise, mariages et soirées privées, de Genève à Lausanne. Consultations à distance et cours de Tarot de Marseille.",
+  "areaServed": [
+    { "@type": "City", "name": "Genève" },
+    { "@type": "City", "name": "Nyon" },
+    { "@type": "City", "name": "Rolle" },
+    { "@type": "City", "name": "Morges" },
+    { "@type": "City", "name": "Lausanne" },
+    { "@type": "AdministrativeArea", "name": "Canton de Genève" },
+    { "@type": "AdministrativeArea", "name": "Canton de Vaud" },
+    { "@type": "AdministrativeArea", "name": "Arc lémanique" }
+  ],
+  "availableLanguage": ["fr", "en", "de"],
+  "priceRange": "CHF 35–1000",
+  "currenciesAccepted": "CHF",
+  "founder": { "@type": "Person", "name": "Natacha Laure" },
+  "address": { "@type": "PostalAddress", "addressCountry": "CH" },
+  "email": "contact@tarot-events.ch",
+  "knowsLanguage": ["fr", "en", "de"]
+}
+</script>
+</head>
+{%- assign avec_hero = false -%}
+{%- if content contains '<div class="hero">' -%}{%- assign avec_hero = true -%}{%- endif -%}
+<body{% if avec_hero %} class="avec-hero"{% endif %}>
+
+{% include header.html %}
+
+<main id="contenu">
+{{ content }}
+</main>
+
+{% include footer.html %}
+
+<script src="/assets/js/main.js" defer></script>
+</body>
+</html>
