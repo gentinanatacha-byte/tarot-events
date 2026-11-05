@@ -8,6 +8,16 @@ baseurl: ""
 lang: fr
 
 # ───────────────────────────────────────────────────────────────
+# ─────────────────────────────────────────────────────────────────
+# PAIEMENT — colle ici l'adresse de ton lien de paiement Stripe.
+# Tant que la ligne est vide, aucun bouton de paiement n'apparaît :
+# le site dit simplement que tu reviens avec la marche à suivre.
+# Pour créer le lien : dashboard.stripe.com → Liens de paiement →
+# Nouveau → produit « Lecture écrite de tarot », 35 CHF, devise CHF →
+# Créer → copier l'adresse (elle commence par https://buy.stripe.com/).
+stripe_lecture_ecrite: "https://buy.stripe.com/eVqcN52Ml5XV8zM8FNfMA02"
+# ─────────────────────────────────────────────────────────────────
+
 # LA SEULE LIGNE À CHANGER TOI-MÊME
 # Identifiant du 2e formulaire Formspree (la partie après /f/).
 # Elle alimente les deux formulaires du site, dans les trois langues.

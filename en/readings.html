@@ -24,7 +24,10 @@ image: /assets/images/natacha-consultation-700.webp
       <table class="tarifs">
         <thead><tr><th scope="col">Option</th><th scope="col">Length</th><th scope="col" class="num">Price</th></tr></thead>
         <tbody>
-          <tr><td>Written reading — one question, detailed answer within 48 h</td><td>written</td><td class="num">CHF 35</td></tr>
+          <tr class="ligne-payable">
+            <td>Written reading — one question, detailed answer within 48 h{% if site.stripe_lecture_ecrite != "" %}<a class="lien-payer" href="{{ site.stripe_lecture_ecrite }}" rel="noopener">{{ site.data.i18n.en.payer_item }}</a>{% endif %}</td>
+            <td>written</td><td class="num">CHF {{ site.tarifs.ecrit }}</td>
+          </tr>
           <tr><td>Short reading — video call or WhatsApp</td><td>30 min</td><td class="num">CHF 60</td></tr>
           <tr><td>Reading — video call or WhatsApp</td><td>60 min</td><td class="num">CHF 100</td></tr>
           <tr><td>In-depth review</td><td>90 min</td><td class="num">CHF 140</td></tr>

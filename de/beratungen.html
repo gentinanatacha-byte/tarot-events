@@ -24,7 +24,10 @@ image: /assets/images/natacha-consultation-700.webp
       <table class="tarifs">
         <thead><tr><th scope="col">Angebot</th><th scope="col">Dauer</th><th scope="col" class="num">Preis</th></tr></thead>
         <tbody>
-          <tr><td>Schriftliche Lesung — eine Frage, ausführliche Antwort innert 48 Std.</td><td>schriftlich</td><td class="num">CHF 35</td></tr>
+          <tr class="ligne-payable">
+            <td>Schriftliche Lesung — eine Frage, ausführliche Antwort innert 48 Std.{% if site.stripe_lecture_ecrite != "" %}<a class="lien-payer" href="{{ site.stripe_lecture_ecrite }}" rel="noopener">{{ site.data.i18n.de.payer_item }}</a>{% endif %}</td>
+            <td>schriftlich</td><td class="num">CHF {{ site.tarifs.ecrit }}</td>
+          </tr>
           <tr><td>Kurzberatung — Videoanruf oder WhatsApp</td><td>30 Min.</td><td class="num">CHF 60</td></tr>
           <tr><td>Beratung — Videoanruf oder WhatsApp</td><td>60 Min.</td><td class="num">CHF 100</td></tr>
           <tr><td>Vertiefte Standortbestimmung</td><td>90 Min.</td><td class="num">CHF 140</td></tr>

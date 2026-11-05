@@ -26,7 +26,10 @@ image: /assets/images/natacha-consultation-700.webp
           <tr><th scope="col">Formule</th><th scope="col">Durée</th><th scope="col" class="num">Prix</th></tr>
         </thead>
         <tbody>
-          <tr><td>Lecture écrite — une question, réponse détaillée sous 48 h</td><td>écrit</td><td class="num">35 CHF</td></tr>
+          <tr class="ligne-payable">
+            <td>Lecture écrite — une question, réponse détaillée sous 48 h{% if site.stripe_lecture_ecrite != "" %}<a class="lien-payer" href="{{ site.stripe_lecture_ecrite }}" rel="noopener">{{ site.data.i18n.fr.payer_item }}</a>{% endif %}</td>
+            <td>écrit</td><td class="num">{{ site.tarifs.ecrit }} CHF</td>
+          </tr>
           <tr><td>Consultation courte — visio ou WhatsApp</td><td>30 min</td><td class="num">60 CHF</td></tr>
           <tr><td>Consultation — visio ou WhatsApp</td><td>60 min</td><td class="num">100 CHF</td></tr>
           <tr><td>Bilan approfondi</td><td>90 min</td><td class="num">140 CHF</td></tr>

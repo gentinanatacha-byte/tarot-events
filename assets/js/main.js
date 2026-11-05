@@ -64,6 +64,10 @@
       if (submit) { submit.disabled = true; submit.textContent = '…'; }
       if (status) { status.textContent = ''; status.className = 'form-status'; }
 
+      // form.reset() effacera les champs cachés : on garde la référence de côté.
+      var champRefEnvoi = form.querySelector('[data-reference]');
+      var refEnvoyee = champRefEnvoi ? champRefEnvoi.value : '';
+
       fetch(form.action, {
         method: 'POST',
         body: new FormData(form),
@@ -73,6 +77,26 @@
           if (!r.ok) throw new Error('http');
           form.reset();
           if (status) { status.textContent = okMsg; status.className = 'form-status ok'; }
+          // Envoi réussi : si un lien de paiement est configuré, on affiche
+          // l'étape de règlement juste en dessous.
+          var paiement = document.querySelector('[data-etape-paiement]');
+          if (paiement && form.closest('.offre-lecture')) {
+            // La référence voyage jusqu'à Stripe dans l'URL : c'est elle qui
+            // relie le paiement à la demande reçue par e-mail.
+            var ref = refEnvoyee;
+            var vu = paiement.querySelector('[data-reference-affichee]');
+            if (vu && ref) vu.textContent = ref;
+            var lien = paiement.querySelector('[data-lien-paiement]');
+            if (lien && ref) {
+              var url = lien.getAttribute('data-lien-paiement');
+              lien.href = url + (url.indexOf('?') === -1 ? '?' : '&') +
+                          'client_reference_id=' + encodeURIComponent(ref);
+            }
+            paiement.hidden = false;
+            [].slice.call(paiement.querySelectorAll('[data-anim]')).forEach(function (el) {
+              el.classList.add('est-vu');
+            });
+          }
         })
         .catch(function () {
           if (status) { status.textContent = koMsg; status.className = 'form-status ko'; }
@@ -140,14 +164,32 @@
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
     cibles.forEach(function (el) { vigie.observe(el); });
 
-    // Filet de sécurité : au cas où un bloc échapperait quand même à la vigie.
-    window.addEventListener('load', function () {
-      window.setTimeout(function () {
-        cibles.forEach(function (el) {
-          if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('est-vu');
-        });
-      }, 400);
-    });
+    // Filet de sécurité. Un saut direct en bas de page peut faire traverser
+    // l'écran à un bloc entre deux images : la vigie ne voit rien passer.
+    // On repasse donc au défilement, et on s'arrête dès qu'il ne reste rien.
+    var restants = cibles.slice();
+    var rattrapage = function () {
+      restants = restants.filter(function (el) {
+        if (el.getBoundingClientRect().top < window.innerHeight) {
+          el.classList.add('est-vu');
+          return false;
+        }
+        return true;
+      });
+      if (!restants.length) {
+        window.removeEventListener('scroll', auDefilement);
+        window.removeEventListener('resize', rattrapage);
+      }
+    };
+    var enAttente = false;
+    var auDefilement = function () {
+      if (enAttente) return;
+      enAttente = true;
+      window.requestAnimationFrame(function () { enAttente = false; rattrapage(); });
+    };
+    window.addEventListener('scroll', auDefilement, { passive: true });
+    window.addEventListener('resize', rattrapage);
+    window.addEventListener('load', rattrapage);
   }
 
   /* ---- Entrée du héros ---- */
@@ -241,12 +283,16 @@
     var lent = reseau.saveData === true || /2g/.test(reseau.effectiveType || '');
     var large = window.matchMedia('(min-width: 980px)').matches;
 
-    if (large && !sobre && !lent) {
-      var base = fond.getAttribute('data-video-fond');
+    if (!sobre && !lent) {
+      // Deux montages : 1280 px pour les grands écrans, 854 px pour les
+      // téléphones — 260 Ko au lieu de 645, pour une vidéo affichée en fond.
+      // L'image de repli, elle, n'existe qu'en une seule version.
+      var racine = fond.getAttribute('data-video-fond');
+      var base = racine + (large ? '' : '-mobile');
       var guetFond = new IntersectionObserver(function (entrees) {
         if (!entrees[0].isIntersecting) return;
         guetFond.disconnect();
-        fond.poster = base + '-poster.webp';
+        fond.poster = racine + '-poster.webp';
         // Deux formats : le navigateur n'en télécharge qu'un, le premier qu'il
         // sait lire. WebM d'abord (plus léger), MP4 pour Safari et les autres.
         [['.webm', 'video/webm'], ['.mp4', 'video/mp4']].forEach(function (f) {
@@ -273,7 +319,9 @@
     }
   }
 
-  /* ---- Tirage : trois cartes du jeu de Natacha, une seule se retourne ---- */
+  /* ---- Tirage en croix : cinq cartes, retournées une à une ----
+     Quand les cinq sont retournées, le formulaire apparaît avec les cartes
+     tirées en champs cachés, pour que Natacha reçoive la croix exacte. */
   var tirage = document.querySelector('[data-tirage]');
   if (tirage) {
     var source = document.querySelector('script[data-arcanes]');
@@ -284,9 +332,37 @@
     var suite = document.querySelector('[data-tirage-suite]');
     var invite = document.querySelector('[data-tirage-invite]');
     var relancer = document.querySelector('[data-tirage-reset]');
+    var champs = [].slice.call(document.querySelectorAll('[data-carte-tiree]'));
+    var champRef = document.querySelector('[data-reference]');
     var visible = false;
 
+    // Référence courte, sans ambiguïté à la lecture : ni O ni I ni 0 ni 1.
+    var nouvelleReference = function () {
+      var lettres = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+      var r = '';
+      for (var i = 0; i < 6; i++) r += lettres.charAt(Math.floor(Math.random() * lettres.length));
+      return 'TC-' + r;
+    };
+
     var urlCarte = function (id, largeur) { return '/assets/cartes/' + id + '-' + largeur + '.webp'; };
+
+    // Sur un téléphone à forte densité, le navigateur prendrait la grande image
+    // pour une carte de 150 px de large. 340 px y est déjà bien assez fin.
+    var largeurCarte = function () {
+      var grand = window.matchMedia('(min-width: 980px)').matches;
+      return (grand && window.devicePixelRatio > 1.5) ? 620 : 340;
+    };
+
+    // Chargement progressif : on ne précharge QUE la première carte, puis la
+    // suivante à chaque retournement. La plupart des visiteurs n'en retourneront
+    // aucune — inutile de leur faire télécharger les cinq.
+    var prechargerUne = function (indice) {
+      var c = cartes[indice];
+      if (!c || !c.dataset.id) return;
+      var i = new Image();
+      i.src = urlCarte(c.dataset.id, largeurCarte());
+    };
+    var precharger = function () { prechargerUne(0); };
 
     var distribuer = function () {
       var pioche = arcanes.slice();
@@ -298,53 +374,59 @@
         c.dataset.num = a.num;
         var img = c.querySelector('.carte-face img');
         img.removeAttribute('src');
-        img.removeAttribute('srcset');
         img.alt = '';
         c.classList.remove('est-tiree');
         c.disabled = false;
       });
+      champs.forEach(function (ch) { ch.value = ''; });
+      if (champRef) champRef.value = nouvelleReference();
       if (suite) suite.hidden = true;
       if (invite) invite.hidden = false;
       if (visible) precharger();
     };
 
-    // On choisit la largeur nous-mêmes plutôt qu'avec un srcset : sur un téléphone
-    // à forte densité, le navigateur prendrait la grande image alors que la carte
-    // ne fait que 160 pixels de large à l'écran. 340 px y est déjà deux fois plus
-    // fin que nécessaire, pour un tiers du poids.
-    var largeurCarte = function () {
-      var grand = window.matchMedia('(min-width: 980px)').matches;
-      return (grand && window.devicePixelRatio > 1.5) ? 620 : 340;
-    };
-
-    // On ne télécharge les trois cartes distribuées qu'une fois la section à l'écran.
-    var precharger = function () {
-      var w = largeurCarte();
-      cartes.forEach(function (c) {
-        if (!c.dataset.id) return;
-        var i = new Image();
-        i.src = urlCarte(c.dataset.id, w);
-      });
+    var toutesRetournees = function () {
+      return cartes.every(function (c) { return c.classList.contains('est-tiree'); });
     };
 
     var reveler = function (c) {
+      if (c.classList.contains('est-tiree')) return;
       var img = c.querySelector('.carte-face img');
       img.src = urlCarte(c.dataset.id, largeurCarte());
       img.alt = c.dataset.num + ' — ' + c.dataset.nom;
       c.classList.add('est-tiree');
-      cartes.forEach(function (autre) { if (autre !== c) autre.disabled = true; });
-      if (invite) invite.hidden = true;
-      window.setTimeout(function () { if (suite) suite.hidden = false; }, sobre ? 0 : 700);
+
+      var champ = document.querySelector('[data-carte-tiree="' + c.dataset.rang + '"]');
+      if (champ) champ.value = c.dataset.num + ' — ' + c.dataset.nom;
+
+      // on prépare la suivante pendant que celle-ci se retourne
+      prechargerUne(cartes.indexOf(c) + 1);
+
+      if (toutesRetournees()) {
+        if (invite) invite.hidden = true;
+        window.setTimeout(function () {
+          if (!suite) return;
+          suite.hidden = false;
+          // Le bloc était masqué quand la vigie d'apparition l'a observé : elle
+          // ne le révélera jamais toute seule. On le fait ici.
+          [].slice.call(suite.querySelectorAll('[data-anim]')).forEach(function (el) {
+            el.classList.add('est-vu');
+          });
+          // on ne saute pas à la section : on laisse la personne finir de
+          // regarder sa croix, elle descendra d'elle-même.
+        }, sobre ? 0 : 750);
+      }
     };
 
     cartes.forEach(function (c) {
-      c.addEventListener('click', function () {
-        if (tirage.querySelector('.est-tiree')) return;
-        reveler(c);
-      });
+      c.addEventListener('click', function () { reveler(c); });
     });
 
-    if (relancer) relancer.addEventListener('click', distribuer);
+    if (relancer) relancer.addEventListener('click', function () {
+      distribuer();
+      tirage.scrollIntoView({ behavior: sobre ? 'auto' : 'smooth', block: 'center' });
+    });
+
     distribuer();
 
     if ('IntersectionObserver' in window) {

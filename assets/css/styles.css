@@ -420,9 +420,45 @@ html.js hr.rule[data-anim].est-vu { scale: 1 1; }
   background: radial-gradient(ellipse at 50% 0%, rgba(184, 132, 58, .14), transparent 70%);
   pointer-events: none;
 }
-.tirage { display: flex; justify-content: center; gap: clamp(.75rem, 3vw, 1.75rem); margin-top: 2.5rem; perspective: 1400px; }
+/* Disposition en croix :
+          [2 l'avantage]
+  [1 passé] [4 actuelle] [5 conclusion]
+          [3 le blocage]
+   Sur téléphone, la croix se déplie en colonne, dans l'ordre du tirage. */
+.croix {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(.6rem, 2vw, 1.5rem) clamp(.5rem, 1.6vw, 1.25rem);
+  justify-items: center;
+  max-width: 44rem;
+  margin: 2.75rem auto 0;
+  perspective: 1600px;
+}
+.croix-1 { grid-area: 2 / 1; }
+.croix-2 { grid-area: 1 / 2; }
+.croix-3 { grid-area: 3 / 2; }
+.croix-4 { grid-area: 2 / 2; }
+.croix-5 { grid-area: 2 / 3; }
+.croix-case { display: flex; flex-direction: column; align-items: center; gap: .6rem; width: 100%; }
+.croix-position {
+  margin: 0; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--gris); text-align: center; line-height: 1.35;
+}
+.croix-position .rang {
+  display: inline-block; min-width: 1.1rem; color: var(--or);
+  font-family: var(--font-display); font-size: .78rem;
+}
+.est-tiree ~ .croix-position { color: var(--beige-cl); }
+
+@media (max-width: 620px) {
+  .croix { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 22rem; }
+  .croix-1, .croix-2, .croix-3, .croix-4, .croix-5 { grid-area: auto; }
+  .croix-5 { grid-column: span 2; }
+  .croix-5 .carte { max-width: 9rem; margin-inline: auto; }
+}
 .carte {
-  flex: 0 1 clamp(7rem, 24vw, 11.5rem);
+  width: 100%;
+  max-width: 11rem;
   aspect-ratio: 600 / 1114;
   background: none; border: 0; padding: 0; cursor: pointer;
   transition: transform .5s cubic-bezier(.22,.68,.24,1), filter .4s ease;
@@ -450,7 +486,6 @@ html.js hr.rule[data-anim].est-vu { scale: 1 1; }
 }
 .carte-face img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .carte.est-tiree { cursor: default; }
-.tirage:has(.est-tiree) .carte:not(.est-tiree) { opacity: .4; filter: saturate(.4); pointer-events: none; }
 .tirage-invite { margin-top: 1.5rem; font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gris); }
 .tirage-suite { margin-top: 1.75rem; }
 .tirage-note { max-width: 34rem; margin-inline: auto; color: var(--beige-cl); }
@@ -495,10 +530,51 @@ html.js hr.rule[data-anim].est-vu { scale: 1 1; }
   width: 100%; height: 100%; object-fit: cover;
   opacity: 0; transition: opacity 1.6s ease;
 }
-.tirage-fond video.est-visible { opacity: .5; }
+.tirage-fond video.est-visible { opacity: .78; }
 .tirage-fond::after {
   content: ""; position: absolute; inset: 0;
   background:
-    radial-gradient(ellipse at 50% 50%, rgba(14,11,8,.62) 0%, rgba(14,11,8,.88) 68%, var(--noir-2) 100%),
+    radial-gradient(ellipse at 50% 45%, rgba(14,11,8,.42) 0%, rgba(14,11,8,.76) 70%, var(--noir-2) 100%),
     linear-gradient(to bottom, var(--noir-2), transparent 18%, transparent 82%, var(--noir-2));
 }
+
+/* ---------- Offre de lecture écrite sous la croix ---------- */
+.offre-lecture {
+  margin-top: 2.5rem; padding: clamp(1.5rem, 4vw, 2.5rem);
+  border: 1px solid var(--brun-cl); border-radius: .5rem;
+  background: linear-gradient(160deg, rgba(34, 26, 18, .92), rgba(14, 11, 8, .92));
+  backdrop-filter: blur(6px);
+}
+.offre-lecture .eyebrow { margin-bottom: .35rem; }
+.offre-prix {
+  font-family: var(--font-display); font-size: clamp(1.9rem, 5vw, 2.6rem);
+  color: var(--or-pale); margin: 0 0 .5rem; letter-spacing: .02em;
+}
+.offre-lecture .aide { margin: .45rem 0 0; font-size: .78rem; color: var(--gris); line-height: 1.5; }
+.tirage-invite[hidden] { display: none; }
+
+/* ---------- Étape de paiement, après l'envoi du tirage ---------- */
+.etape-paiement { margin-top: 1.75rem; }
+.etape-paiement p { margin-bottom: 1rem; }
+.etape-paiement[hidden] { display: none; }
+
+/* ---------- Lien de paiement dans le tableau des tarifs ---------- */
+.lien-payer {
+  display: inline-block; margin-left: .7rem; padding: .2rem .7rem;
+  font-family: var(--font-body); font-size: .68rem; letter-spacing: .1em;
+  text-transform: uppercase; white-space: nowrap;
+  color: var(--noir); background: var(--or); border-radius: 2rem;
+  text-decoration: none; transition: background var(--transition);
+}
+.lien-payer:hover { background: var(--or-pale); color: var(--noir); }
+
+/* ---------- Référence de rapprochement paiement / tirage ---------- */
+.reference-bloc {
+  display: flex; flex-direction: column; align-items: center; gap: .3rem;
+  margin: 1.5rem 0; padding: 1rem 1.25rem;
+  border: 1px dashed var(--brun-lt); border-radius: .4rem;
+  background: rgba(14, 11, 8, .5);
+}
+.reference-libelle { font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gris); }
+.reference-code { font-family: var(--font-display); font-size: 1.4rem; color: var(--or-pale); letter-spacing: .12em; }
+.reference-note { font-size: .76rem; color: var(--gris); text-align: center; }

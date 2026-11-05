@@ -1,16 +1,23 @@
 {%- comment -%}
-  Tirage d'accueil : trois cartes face cachée, une seule se retourne.
-  Les cartes sont celles du jeu fait maison de Natacha (/assets/cartes/).
-  L'image n'est chargée QUE lorsque la section arrive à l'écran, et seulement
-  pour les trois cartes distribuées : la page d'accueil ne télécharge jamais
-  les vingt-deux. Sans JavaScript, le bloc reste lisible avec ses liens.
+  Tirage en croix : cinq cartes face cachée, retournées une à une.
+  Positions, dans l'ordre : 1 le passé · 2 l'avantage · 3 le blocage ·
+  4 la situation actuelle · 5 conclusion.
+  Une fois les cinq retournées, le formulaire de demande de lecture apparaît,
+  avec les cartes tirées en champs cachés : tu reçois la croix exacte.
+
+  Les images ne sont chargées QUE pour les cinq cartes distribuées, et
+  seulement quand la section arrive à l'écran. Sans JavaScript, le bloc reste
+  lisible et renvoie vers la page des consultations.
 {%- endcomment -%}
 {%- assign L = site.data.i18n[page.lang] -%}
-<section class="section-tirage">
+{%- assign url_consult = '/consultations/' -%}
+{%- if page.lang == 'en' %}{% assign url_consult = '/en/readings/' %}{% elsif page.lang == 'de' %}{% assign url_consult = '/de/beratungen/' %}{% endif -%}
+<section class="section-tirage" id="tirage">
   <div class="tirage-fond" aria-hidden="true">
     <video muted loop playsinline preload="none" disablepictureinpicture
            width="1280" height="720" data-video-fond="/assets/video/tirage"></video>
   </div>
+
   <div class="wrap wrap-narrow center">
     <p class="eyebrow">{{ L.tirage_eyebrow }}</p>
     <h2>{{ L.tirage_titre }}</h2>
@@ -20,28 +27,88 @@
       [{% for a in site.data.arcanes %}{"id":{{ a.id | jsonify }},"num":{{ a.num | jsonify }},"nom":{{ a[page.lang] | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]
     </script>
 
-    <div class="tirage" data-tirage>
-      {% for i in (1..3) %}
-      <button class="carte" type="button" aria-label="{{ L.tirage_invite }}">
-        <span class="carte-inner">
-          <span class="carte-dos">{% include motif-carte.html %}</span>
-          <span class="carte-face">
-            <img alt="" width="340" height="631" decoding="async">
+    <div class="croix" data-tirage>
+      {% for pos in L.tirage_positions %}
+      <div class="croix-case croix-{{ forloop.index }}">
+        <button class="carte" type="button" data-rang="{{ forloop.index }}"
+                aria-label="{{ forloop.index }}. {{ pos }} — {{ L.tirage_invite }}">
+          <span class="carte-inner">
+            <span class="carte-dos">{% include motif-carte.html %}</span>
+            <span class="carte-face"><img alt="" width="340" height="631" decoding="async"></span>
           </span>
-        </span>
-      </button>
+        </button>
+        <p class="croix-position"><span class="rang">{{ forloop.index }}</span> {{ pos }}</p>
+      </div>
       {% endfor %}
     </div>
 
     <p class="tirage-invite" data-tirage-invite>{{ L.tirage_invite }}</p>
-
-    <div class="tirage-suite" data-tirage-suite hidden>
-      <p class="tirage-note">{{ L.tirage_suite }}</p>
-      <p>
-        <a class="btn btn-solid" href="https://natachalaurevoyance.fr/aurea/" rel="noopener">{{ L.tirage_cta_aurea }}</a>
-        <a class="btn" href="{{ L.base }}{% if page.lang == 'fr' %}/consultations/{% elsif page.lang == 'en' %}/readings/{% else %}/beratungen/{% endif %}">{{ L.tirage_cta_consult }}</a>
-      </p>
-      <p><button class="lien-nu" type="button" data-tirage-reset>{{ L.tirage_rejouer }}</button></p>
-    </div>
   </div>
+
+  <div class="wrap wrap-narrow" data-tirage-suite hidden>
+    <hr class="rule">
+    <div class="center">
+      <h3>{{ L.tirage_fini_titre }}</h3>
+      <p class="tirage-note">{{ L.tirage_fini }}</p>
+    </div>
+
+    <div class="offre-lecture">
+      <p class="eyebrow">{{ L.tirage_offre }}</p>
+      <p class="offre-prix">{{ site.tarifs.ecrit }} CHF</p>
+      <p class="muted">{{ L.tirage_offre_detail }}</p>
+
+      <form action="https://formspree.io/f/{{ site.formspree_id }}" method="POST" data-ajax
+            data-ok="{% if site.stripe_lecture_ecrite != '' %}{{ L.tirage_form_ok_paiement }}{% else %}{{ L.tirage_form_ok }}{% endif %}" data-ko="{{ L.form_ko }}">
+        <input type="hidden" name="_subject" value="Tirage en croix — tarot-events.ch ({{ page.lang | upcase }})">
+        <input type="hidden" name="origine" value="tarot-events.ch · {{ page.lang | upcase }} · tirage en croix">
+        <input type="hidden" name="Tarif" value="{{ site.tarifs.ecrit }} CHF">
+        <input type="hidden" name="Référence" value="" data-reference>
+        {% for pos in L.tirage_positions %}
+        <input type="hidden" name="{{ forloop.index }}. {{ pos }}" value="" data-carte-tiree="{{ forloop.index }}">
+        {% endfor %}
+        <p style="position:absolute;left:-9999px" aria-hidden="true"><label>{{ L.form_gotcha }} <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></p>
+
+        <div class="form-grid">
+          <div class="field"><label for="tc-nom">{{ L.form_nom }} *</label><input type="text" id="tc-nom" name="{{ L.form_nom }}" required autocomplete="name"></div>
+          <div class="field"><label for="tc-mail">{{ L.form_mail }} *</label><input type="email" id="tc-mail" name="{{ L.form_mail }}" required autocomplete="email"></div>
+          <div class="field full">
+            <label for="tc-question">{{ L.tirage_form_question }} *</label>
+            <textarea id="tc-question" name="{{ L.tirage_form_question }}" required rows="4"></textarea>
+            <p class="aide">{{ L.tirage_form_question_aide }}</p>
+          </div>
+        </div>
+
+        <p style="margin-top:1.5rem"><button class="btn btn-solid" type="submit">{{ L.tirage_form_envoi }}</button></p>
+        <p class="form-status" role="status" aria-live="polite"></p>
+        <p class="form-note">{{ L.form_confid_lecture }}</p>
+      </form>
+
+      {%- if site.stripe_lecture_ecrite != "" %}
+      <div class="etape-paiement" data-etape-paiement hidden>
+        <hr class="rule">
+        <p>{{ L.payer_apres }}</p>
+        <p class="reference-bloc">
+          <span class="reference-libelle">{{ L.reference_libelle }}</span>
+          <strong class="reference-code" data-reference-affichee></strong>
+          <span class="reference-note">{{ L.reference_note }}</span>
+        </p>
+        <p><a class="btn btn-solid" href="{{ site.stripe_lecture_ecrite }}" rel="noopener"
+              data-lien-paiement="{{ site.stripe_lecture_ecrite }}">{{ L.payer }} — {{ site.tarifs.ecrit }} CHF</a></p>
+      </div>
+      {%- endif %}
+    </div>
+
+    <p class="center" style="margin-top:2rem">
+      <a class="btn" href="https://natachalaurevoyance.fr/aurea/" rel="noopener">{{ L.tirage_cta_aurea }}</a>
+    </p>
+    <p class="center" style="margin-top:1rem">
+      <button class="lien-nu" type="button" data-tirage-reset>{{ L.tirage_rejouer }}</button>
+    </p>
+  </div>
+
+  <noscript>
+    <div class="wrap wrap-narrow center">
+      <p><a class="btn btn-solid" href="{{ url_consult }}">{{ L.tirage_offre }} — {{ site.tarifs.ecrit }} CHF</a></p>
+    </div>
+  </noscript>
 </section>
