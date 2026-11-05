@@ -1,0 +1,54 @@
+{% assign L = site.data.i18n[page.lang] %}
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+
+    <div>
+      <p class="brand" style="font-family:var(--font-display);font-size:1.05rem;color:var(--or-pale);display:block;margin-bottom:.4rem">Natacha Laure</p>
+      <p class="muted" style="font-size:.85rem">
+        {%- case page.lang -%}
+        {%- when 'en' -%}
+        Tarot reader, born in Geneva. Event animation from Geneva to Lausanne, and readings at a distance.
+        {%- when 'de' -%}
+        In Genf geborene Tarot-Leserin. Event-Animation von Genf bis Lausanne, sowie Beratungen auf Distanz.
+        {%- else -%}
+        Tarologue née à Genève. Animation d'événements de Genève à Lausanne, et consultations à distance.
+        {%- endcase -%}
+      </p>
+    </div>
+
+    <div>
+      <h4>{{ L.footer_nav }}</h4>
+      <ul>
+        {%- for item in L.nav %}
+        <li><a href="{{ item.url }}">{{ item.label }}</a></li>
+        {%- endfor %}
+      </ul>
+    </div>
+
+    <div>
+      <h4>{{ L.footer_contact }}</h4>
+      <ul>
+        <li><a href="mailto:contact@tarot-events.ch">contact@tarot-events.ch</a></li>
+        {%- assign lien_devis = L.nav | where: "ref", "entreprises" | first -%}
+        {%- assign lien_contact = L.nav | where: "ref", "contact" | first -%}
+        <li><a href="{{ lien_devis.url }}">{{ L.cta_devis }}</a></li>
+        <li><a href="{{ lien_contact.url }}">{{ lien_contact.label }}</a></li>
+        <li><a href="https://natachalaurevoyance.fr/aurea/" rel="noopener">Auréa</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4>{{ L.footer_identite }}</h4>
+      <p class="identite" style="font-size:.84rem">
+        <strong>Natacha Laure</strong> · Tarot Events<br>
+        <a href="/mentions-legales/">{{ L.legal }}</a>
+      </p>
+    </div>
+
+  </div>
+
+  <div class="wrap footer-legal">
+    <span>© {{ site.time | date: "%Y" }} Natacha Laure · Tarot Events</span>
+    <span><a href="/mentions-legales/">{{ L.legal }}</a></span>
+  </div>
+</footer>

@@ -1,0 +1,8 @@
+{%- comment -%}
+  Affiche une date en français. Usage : {% include date-fr.html d=post.date %}
+  Jekyll n'a pas de traduction des mois, on fait la correspondance à la main.
+{%- endcomment -%}
+{%- assign mois = "janvier,février,mars,avril,mai,juin,juillet,août,septembre,octobre,novembre,décembre" | split: "," -%}
+{%- assign m = include.d | date: "%m" | plus: 0 | minus: 1 -%}
+{%- assign j = include.d | date: "%-d" -%}
+{%- if j == "1" -%}1er{%- else -%}{{ j }}{%- endif %} {{ mois[m] }} {{ include.d | date: "%Y" }}
