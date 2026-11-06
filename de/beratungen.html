@@ -25,7 +25,7 @@ image: /assets/images/natacha-consultation-700.webp
         <thead><tr><th scope="col">Angebot</th><th scope="col">Dauer</th><th scope="col" class="num">Preis</th></tr></thead>
         <tbody>
           <tr class="ligne-payable">
-            <td>Schriftliche Lesung — eine Frage, ausführliche Antwort innert 48 Std.{% if site.stripe_lecture_ecrite != "" %}<a class="lien-payer" href="{{ site.stripe_lecture_ecrite }}" rel="noopener">{{ site.data.i18n.de.payer_item }}</a>{% endif %}</td>
+            <td>Schriftliche Lesung — eine Frage, ausführliche Antwort innert 48 Std.<a class="lien-payer" href="/de/#tirage">{{ site.data.i18n.de.payer_item }}</a></td>
             <td>schriftlich</td><td class="num">CHF {{ site.tarifs.ecrit }}</td>
           </tr>
           <tr><td>Kurzberatung — Videoanruf oder WhatsApp</td><td>30 Min.</td><td class="num">CHF 60</td></tr>
@@ -67,7 +67,7 @@ image: /assets/images/natacha-consultation-700.webp
     <h2>Auréa</h2>
     <p>Ich habe <strong>Auréa</strong> entwickelt, eine App für Legungen, mit der Sie die Lesung selbst weiterführen können — mit echten Legungen und geführter Deutung. Drei Legungen gratis, nichts zu installieren.</p>
     <p class="muted" style="font-size:.88rem">Die Preise von Auréa sind in Euro angegeben.</p>
-    <p style="margin-top:1.5rem"><a class="btn" href="https://natachalaurevoyance.fr/aurea/" rel="noopener">Auréa entdecken</a></p>
+    <p style="margin-top:1.5rem"><a class="btn" href="https://natachalaurevoyance.fr/aurea/?site=ch" rel="noopener">Auréa entdecken</a></p>
     </div>
     <div>
       {% include img.html name="aurea-app" alt="Eine Tarotlegung und ein Smartphone mit der Auréa-App" sizes="(min-width: 980px) 46vw, 100vw" %}

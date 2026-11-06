@@ -27,7 +27,7 @@ image: /assets/images/natacha-consultation-700.webp
         </thead>
         <tbody>
           <tr class="ligne-payable">
-            <td>Lecture écrite — une question, réponse détaillée sous 48 h{% if site.stripe_lecture_ecrite != "" %}<a class="lien-payer" href="{{ site.stripe_lecture_ecrite }}" rel="noopener">{{ site.data.i18n.fr.payer_item }}</a>{% endif %}</td>
+            <td>Lecture écrite — une question, réponse détaillée sous 48 h<a class="lien-payer" href="/#tirage">{{ site.data.i18n.fr.payer_item }}</a></td>
             <td>écrit</td><td class="num">{{ site.tarifs.ecrit }} CHF</td>
           </tr>
           <tr><td>Consultation courte — visio ou WhatsApp</td><td>30 min</td><td class="num">60 CHF</td></tr>
@@ -70,7 +70,7 @@ image: /assets/images/natacha-consultation-700.webp
     <h2>Auréa</h2>
     <p>J'ai créé <strong>Auréa</strong>, une application de tirages pour prolonger la lecture par vous-même, avec de vrais tirages et une interprétation guidée. Trois tirages offerts, rien à installer.</p>
     <p class="muted" style="font-size:.88rem">Les tarifs d'Auréa sont indiqués en euros.</p>
-    <p style="margin-top:1.5rem"><a class="btn" href="https://natachalaurevoyance.fr/aurea/" rel="noopener">Découvrir Auréa</a></p>
+    <p style="margin-top:1.5rem"><a class="btn" href="https://natachalaurevoyance.fr/aurea/?site=ch" rel="noopener">Découvrir Auréa</a></p>
     </div>
     <div>
       {% include img.html name="aurea-app" alt="Jeu de tarot et téléphone affichant l'application Auréa" sizes="(min-width: 980px) 46vw, 100vw" %}

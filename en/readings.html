@@ -25,7 +25,7 @@ image: /assets/images/natacha-consultation-700.webp
         <thead><tr><th scope="col">Option</th><th scope="col">Length</th><th scope="col" class="num">Price</th></tr></thead>
         <tbody>
           <tr class="ligne-payable">
-            <td>Written reading — one question, detailed answer within 48 h{% if site.stripe_lecture_ecrite != "" %}<a class="lien-payer" href="{{ site.stripe_lecture_ecrite }}" rel="noopener">{{ site.data.i18n.en.payer_item }}</a>{% endif %}</td>
+            <td>Written reading — one question, detailed answer within 48 h<a class="lien-payer" href="/en/#tirage">{{ site.data.i18n.en.payer_item }}</a></td>
             <td>written</td><td class="num">CHF {{ site.tarifs.ecrit }}</td>
           </tr>
           <tr><td>Short reading — video call or WhatsApp</td><td>30 min</td><td class="num">CHF 60</td></tr>
@@ -67,7 +67,7 @@ image: /assets/images/natacha-consultation-700.webp
     <h2>Auréa</h2>
     <p>I created <strong>Auréa</strong>, a drawing app to continue the reading on your own, with real spreads and guided interpretation. Three free spreads, nothing to install.</p>
     <p class="muted" style="font-size:.88rem">Auréa prices are shown in euros.</p>
-    <p style="margin-top:1.5rem"><a class="btn" href="https://natachalaurevoyance.fr/aurea/" rel="noopener">Discover Auréa</a></p>
+    <p style="margin-top:1.5rem"><a class="btn" href="https://natachalaurevoyance.fr/aurea/?site=ch" rel="noopener">Discover Auréa</a></p>
     </div>
     <div>
       {% include img.html name="aurea-app" alt="A tarot spread and a phone showing the Auréa app" sizes="(min-width: 980px) 46vw, 100vw" %}

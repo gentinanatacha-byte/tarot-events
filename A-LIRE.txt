@@ -1,0 +1,89 @@
+═══════════════════════════════════════════════════════════════════
+  SITE SUISSE — tarot-events.ch
+  7 fichiers à remplacer. Rien d'autre à toucher.
+═══════════════════════════════════════════════════════════════════
+
+J'ai comparé ton site EN LIGNE avec la version à jour, fichier par
+fichier. Ces 7-là sont les seuls qui diffèrent. Tout le reste de ton
+dépôt est déjà bon : n'y touche pas.
+
+
+CE QUI CHANGE
+─────────────
+1. Payer sans avoir tiré, c'est fini.
+   Sur la page des tarifs, la ligne « Lecture écrite » menait droit sur
+   Stripe. Maintenant elle mène au tirage en croix de la page d'accueil.
+   Le libellé le dit : « Tirer mes cartes et commander ».
+   On tire → on remplit le formulaire → on paie. Dans cet ordre.
+   Corrigé dans les trois langues.
+
+2. Le bouton de retour d'Auréa ramène en Suisse.
+   Tous les liens vers Auréa portent maintenant le marqueur ?site=ch.
+   Depuis le site suisse, le bouton « retour au site » de la page Auréa
+   renverra sur tarot-events.ch et non sur le site français.
+
+
+OÙ DÉPOSER CHAQUE FICHIER (le dossier compte !)
+───────────────────────────────────────────────
+  FICHIER                 →  DOSSIER SUR GITHUB
+  ─────────────────────────────────────────────
+  footer.html             →  _includes/
+  tirage.html             →  _includes/
+  i18n.yml                →  _data/
+  consultations.html      →  à la racine
+  readings.html           →  en/
+  beratungen.html         →  de/
+  styles.css              →  assets/css/
+
+⚠ Deux fichiers s'appellent footer.html / readings.html / beratungen.html
+  dans des dossiers différents. Ouvre bien le bon dossier AVANT de
+  déposer, sinon GitHub crée un doublon au mauvais endroit.
+
+
+COMMENT FAIRE SUR GITHUB (depuis l'ordinateur)
+──────────────────────────────────────────────
+Pour chaque fichier, un par un :
+  1. Sur github.com, ouvre ton dépôt tarot-events.ch
+  2. Clique sur le DOSSIER de destination (ex. _includes)
+  3. Bouton « Add file » → « Upload files »
+  4. Glisse le fichier
+  5. En bas, « Commit changes »
+
+GitHub remplace automatiquement un fichier qui porte le même nom dans
+le même dossier. Tu peux aussi déposer plusieurs fichiers d'un même
+dossier en une seule fois.
+
+Compte 2 à 3 minutes après le dernier dépôt pour que le site se
+reconstruise, puis recharge la page en vidant le cache (Ctrl+Maj+R, ou
+Cmd+Maj+R sur Mac).
+
+
+COMMENT VÉRIFIER QUE C'EST PASSÉ
+────────────────────────────────
+  ▢ tarot-events.ch/consultations/ → la ligne « Lecture écrite » affiche
+    « Tirer mes cartes et commander » et NON « Payer et réserver »
+  ▢ Ce lien t'emmène à la croix sur la page d'accueil, titre bien visible
+  ▢ Tu retournes les 5 cartes → le formulaire apparaît → après envoi,
+    le bouton Stripe apparaît avec une référence TC-XXXXXX
+  ▢ En bas de n'importe quelle page, le lien Auréa finit par ?site=ch
+
+
+CE QUI RESTE À FAIRE DE TON CÔTÉ (quand tu veux)
+────────────────────────────────────────────────
+  ▢ Dans Stripe, régler la redirection après paiement sur :
+       https://tarot-events.ch/merci/
+  ▢ Pour faire apparaître la précommande du jeu à 50 CHF : créer un
+    deuxième lien de paiement Stripe, puis remplir les lignes 28 à 30
+    de _config.yml (deck_stripe, deck_expedition, deck_livraison).
+    Tant qu'une des trois est vide, le bloc reste invisible. C'est voulu.
+
+À SAVOIR, SANS DÉTOUR
+─────────────────────
+  • Le client ne reçoit PAS d'e-mail de confirmation automatique après
+    le formulaire. L'envoi automatique de Formspree est réservé à leur
+    formule payante (Professional). Il voit une confirmation à l'écran,
+    et Stripe lui envoie son reçu après paiement. Si tu veux un vrai
+    e-mail de confirmation, il faut passer Formspree en payant — dis-le
+    moi et je te chiffre ça.
+  • Formspree gratuit = 50 envois par mois, tous formulaires confondus.
+    Le tirage en croix va consommer ce quota. À surveiller.

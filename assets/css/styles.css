@@ -414,7 +414,10 @@ html.js hr.rule[data-anim].est-vu { scale: 1 1; }
 .btn:hover::after { transform: translateX(120%); }
 
 /* ---------- Tirage ---------- */
-.section-tirage { padding-block: clamp(2.5rem, 6vw, 4rem); background: var(--noir-2); border-block: 1px solid var(--brun-cl); position: relative; overflow: hidden; }
+/* scroll-margin-top : quand on arrive ici depuis la page des tarifs
+   (lien « Tirer mes cartes et commander »), l'en-tête fixe ne doit pas
+   manger le titre de la section. */
+.section-tirage { padding-block: clamp(2.5rem, 6vw, 4rem); background: var(--noir-2); border-block: 1px solid var(--brun-cl); position: relative; overflow: hidden; scroll-margin-top: 5.5rem; }
 .section-tirage::before {
   content: ""; position: absolute; inset: -40% 20% auto 20%; height: 70%;
   background: radial-gradient(ellipse at 50% 0%, rgba(184, 132, 58, .14), transparent 70%);
