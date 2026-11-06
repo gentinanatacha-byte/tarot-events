@@ -414,7 +414,7 @@ html.js hr.rule[data-anim].est-vu { scale: 1 1; }
 .btn:hover::after { transform: translateX(120%); }
 
 /* ---------- Tirage ---------- */
-.section-tirage { background: var(--noir-2); border-block: 1px solid var(--brun-cl); position: relative; overflow: hidden; }
+.section-tirage { padding-block: clamp(2.5rem, 6vw, 4rem); background: var(--noir-2); border-block: 1px solid var(--brun-cl); position: relative; overflow: hidden; }
 .section-tirage::before {
   content: ""; position: absolute; inset: -40% 20% auto 20%; height: 70%;
   background: radial-gradient(ellipse at 50% 0%, rgba(184, 132, 58, .14), transparent 70%);
@@ -428,10 +428,10 @@ html.js hr.rule[data-anim].est-vu { scale: 1 1; }
 .croix {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(.6rem, 2vw, 1.5rem) clamp(.5rem, 1.6vw, 1.25rem);
+  gap: clamp(.35rem, 1vw, .6rem) clamp(.35rem, 1vw, .7rem);
   justify-items: center;
-  max-width: 44rem;
-  margin: 2.75rem auto 0;
+  max-width: 30rem;
+  margin: 1.75rem auto 0;
   perspective: 1600px;
 }
 .croix-1 { grid-area: 2 / 1; }
@@ -439,14 +439,15 @@ html.js hr.rule[data-anim].est-vu { scale: 1 1; }
 .croix-3 { grid-area: 3 / 2; }
 .croix-4 { grid-area: 2 / 2; }
 .croix-5 { grid-area: 2 / 3; }
-.croix-case { display: flex; flex-direction: column; align-items: center; gap: .6rem; width: 100%; }
+.croix-case { display: flex; flex-direction: column; align-items: center; gap: .35rem; width: 100%; }
 .croix-position {
-  margin: 0; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase;
-  color: var(--gris); text-align: center; line-height: 1.35;
+  margin: 0; font-size: .6rem; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--beige-cl); text-align: center; line-height: 1.25;
+  text-shadow: 0 1px 6px rgba(14, 11, 8, .95), 0 0 14px rgba(14, 11, 8, .8);
 }
 .croix-position .rang {
-  display: inline-block; min-width: 1.1rem; color: var(--or);
-  font-family: var(--font-display); font-size: .78rem;
+  display: inline-block; min-width: .9rem; color: var(--or-cl);
+  font-family: var(--font-display); font-size: .72rem;
 }
 .est-tiree ~ .croix-position { color: var(--beige-cl); }
 
@@ -458,7 +459,7 @@ html.js hr.rule[data-anim].est-vu { scale: 1 1; }
 }
 .carte {
   width: 100%;
-  max-width: 11rem;
+  max-width: 7.4rem;
   aspect-ratio: 600 / 1114;
   background: none; border: 0; padding: 0; cursor: pointer;
   transition: transform .5s cubic-bezier(.22,.68,.24,1), filter .4s ease;
@@ -486,7 +487,7 @@ html.js hr.rule[data-anim].est-vu { scale: 1 1; }
 }
 .carte-face img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .carte.est-tiree { cursor: default; }
-.tirage-invite { margin-top: 1.5rem; font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gris); }
+.tirage-invite { margin-top: 1.1rem; font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gris); }
 .tirage-suite { margin-top: 1.75rem; }
 .tirage-note { max-width: 34rem; margin-inline: auto; color: var(--beige-cl); }
 .lien-nu { background: none; border: 0; padding: 0; color: var(--gris); font: inherit; font-size: .82rem; cursor: pointer; text-decoration: underline; text-underline-offset: 4px; }
@@ -578,3 +579,37 @@ html.js hr.rule[data-anim].est-vu { scale: 1 1; }
 .reference-libelle { font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gris); }
 .reference-code { font-family: var(--font-display); font-size: 1.4rem; color: var(--or-pale); letter-spacing: .12em; }
 .reference-note { font-size: .76rem; color: var(--gris); text-align: center; }
+
+/* ---------- Précommande du jeu ---------- */
+.precommande .split { align-items: center; }
+.precommande-visuel { position: relative; min-height: clamp(16rem, 34vw, 23rem); }
+.precommande-visuel img {
+  position: absolute; top: 50%; left: 50%;
+  width: clamp(8rem, 17vw, 11.5rem); height: auto;
+  border: 1px solid rgba(184, 132, 58, .5); border-radius: .4rem;
+  box-shadow: 0 22px 46px -20px rgba(0, 0, 0, .95);
+  transition: transform .7s cubic-bezier(.22, .68, .24, 1);
+}
+.precommande-visuel .eventail-1 { transform: translate(-85%, -50%) rotate(-11deg); z-index: 1; }
+.precommande-visuel .eventail-2 { transform: translate(-50%, -54%) rotate(0deg);   z-index: 3; }
+.precommande-visuel .eventail-3 { transform: translate(-15%, -50%) rotate(11deg);  z-index: 1; }
+.precommande:hover .eventail-1 { transform: translate(-95%, -52%) rotate(-15deg); }
+.precommande:hover .eventail-3 { transform: translate(-5%, -52%) rotate(15deg); }
+
+.deck-infos { margin: 1.75rem 0; padding: 0; display: grid; gap: .5rem; }
+.deck-infos > div { display: flex; gap: .6rem; align-items: baseline; flex-wrap: wrap; }
+.deck-infos dt {
+  margin: 0; font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: var(--or);
+}
+.deck-infos dd { margin: 0; color: var(--beige-cl); font-size: .9rem; }
+.deck-prix {
+  font-family: var(--font-display); font-size: clamp(1.8rem, 4.5vw, 2.4rem);
+  color: var(--or-pale); margin: 0 0 1rem;
+}
+@media (prefers-reduced-motion: reduce) {
+  .precommande-visuel img, .precommande:hover .eventail-1, .precommande:hover .eventail-3 { transition: none; }
+}
+@media (max-width: 720px) {
+  .precommande-visuel { min-height: 15rem; }
+  .precommande-visuel img { width: 7.5rem; }
+}

@@ -16,6 +16,19 @@ lang: fr
 # Nouveau → produit « Lecture écrite de tarot », 35 CHF, devise CHF →
 # Créer → copier l'adresse (elle commence par https://buy.stripe.com/).
 stripe_lecture_ecrite: "https://buy.stripe.com/eVqcN52Ml5XV8zM8FNfMA02"
+
+# ─────────────────────────────────────────────────────────────────
+# PRÉCOMMANDE DU JEU ANIMALIER
+# Le bloc n'apparaît sur le site QUE si les trois lignes sont remplies.
+# Tant qu'il en manque une, rien ne s'affiche : pas de demi-page en ligne.
+#   deck_stripe      : second lien de paiement Stripe, à créer pour le jeu
+#   deck_expedition  : ce que tu annonces aux acheteurs (ex. "janvier 2027")
+#   deck_livraison   : frais de port (ex. "Frais de port offerts en Suisse")
+deck_prix: 50
+deck_stripe: ""
+deck_expedition: ""
+deck_livraison: ""
+# ─────────────────────────────────────────────────────────────────
 # ─────────────────────────────────────────────────────────────────
 
 # LA SEULE LIGNE À CHANGER TOI-MÊME
@@ -67,6 +80,10 @@ defaults:
     values:
       layout: "post"
       lang: "fr"
+  - scope:
+      path: ""
+    values:
+      sitemap: true
 
 include:
   - CNAME
@@ -80,3 +97,4 @@ exclude:
   - .gitignore
   - "LISEZ-MOI*.md"
   - "A-LIRE*.md"
+

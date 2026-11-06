@@ -1,0 +1,40 @@
+{%- comment -%}
+  Précommande du jeu animalier.
+  Le bloc n'apparaît QUE si le lien Stripe, la date d'expédition et les
+  conditions de livraison sont renseignés dans _config.yml. Tant qu'il en
+  manque un, rien ne s'affiche : pas de demi-page en ligne.
+
+  Les trois cartes montrées sont tirées au hasard à la construction du site,
+  pas à l'affichage : elles ne bougent pas d'un visiteur à l'autre, et
+  l'image est donc mise en cache normalement.
+{%- endcomment -%}
+{%- assign L = site.data.i18n[page.lang] -%}
+{%- if site.deck_stripe != "" and site.deck_expedition != "" and site.deck_livraison != "" -%}
+{%- assign vitrine = "19,17,06" | split: "," -%}
+<section class="band precommande">
+  <div class="wrap split">
+    <div class="precommande-visuel" aria-hidden="true">
+      {%- for id in vitrine %}
+      <img src="/assets/cartes/{{ id }}-340.webp" alt="" width="340" height="631" loading="lazy" decoding="async" class="eventail-{{ forloop.index }}">
+      {%- endfor %}
+    </div>
+
+    <div>
+      <p class="eyebrow">{{ L.deck_eyebrow }}</p>
+      <h2>{{ L.deck_titre }}</h2>
+      <p class="lede">{{ L.deck_chapo }}</p>
+      <p>{{ L.deck_exclusif }}</p>
+
+      <dl class="deck-infos">
+        <div><dt>{{ L.deck_contenu }}</dt></div>
+        <div><dt>{{ L.deck_expedition_libelle }}</dt><dd>{{ site.deck_expedition }}</dd></div>
+        <div><dt>{{ L.deck_livraison_libelle }}</dt><dd>{{ site.deck_livraison }}</dd></div>
+      </dl>
+
+      <p class="deck-prix">{{ site.deck_prix }} CHF</p>
+      <p><a class="btn btn-solid" href="{{ site.deck_stripe }}" rel="noopener">{{ L.deck_cta }}</a></p>
+      <p class="muted" style="font-size:.78rem">{{ L.deck_mention }}</p>
+    </div>
+  </div>
+</section>
+{%- endif -%}
