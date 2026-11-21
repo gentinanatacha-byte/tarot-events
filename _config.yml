@@ -97,4 +97,9 @@ exclude:
   - .gitignore
   - "LISEZ-MOI*.md"
   - "A-LIRE*.md"
+  # Sécurité : dossiers en double créés par une extraction de ZIP mal placée.
+  # Ils sont retirés de l'archive, mais un envoi sur GitHub ne supprime jamais
+  # ce qui existe déjà — cette ligne garantit qu'ils ne seront pas publiés,
+  # même s'ils traînent encore dans le dépôt. À garder.
+  - assets/images/images
 
