@@ -1,11 +1,11 @@
 natacha-animation:
-  w: 1000
-  h: 1333
-  widths: [480, 768, 1000]
+  w: 1200
+  h: 800
+  widths: [480, 768, 1000, 1200]
 natacha-consultation:
-  w: 700
-  h: 980
-  widths: [480, 700]
+  w: 1000
+  h: 667
+  widths: [480, 768, 1000]
 tarot-marseille:
   w: 1400
   h: 2100
@@ -58,3 +58,7 @@ carnet-et-cartes:
   w: 1400
   h: 933
   widths: [480, 768, 1024, 1400]
+natacha-portrait:
+  w: 620
+  h: 775
+  widths: [480, 620]
