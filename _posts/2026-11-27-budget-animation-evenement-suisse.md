@@ -3,7 +3,7 @@ title: "Quel budget prévoir pour une animation d'événement ?"
 chapo: "Six facteurs font le prix d'une animation, et le nombre d'invités n'est que le troisième. De quoi bâtir un budget avant même de demander un devis."
 seo_title: "Budget d'une animation d'événement en Suisse romande"
 meta_desc: "Ce qui fait le prix d'une animation d'événement : durée, invités, déplacement, exclusivité. Les repères pour bâtir un budget avant de demander un devis."
-date: 2026-11-28
+date: 2026-11-27
 lang: fr
 illustration: "devis-budget"
 illustration_alt: "Salle de réception vide avant installation, tables dressées et lumière douce"

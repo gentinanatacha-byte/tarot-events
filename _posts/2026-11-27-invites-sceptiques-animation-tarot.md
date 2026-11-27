@@ -3,7 +3,7 @@ title: "Et si mes invités n'y croient pas du tout ?"
 chapo: "C'est l'objection numéro un des organisateurs, et la bonne nouvelle est qu'elle repose sur un malentendu. Les sceptiques sont souvent ceux qui restent le plus longtemps à la table."
 seo_title: "Animation tarot : et si mes invités sont sceptiques ?"
 meta_desc: "Faut-il croire au tarot pour apprécier une animation de tarot en soirée ? Ce qui se passe réellement avec les invités sceptiques, et comment présenter l'animation."
-date: 2026-11-29
+date: 2026-11-27
 lang: fr
 illustration: "invite-sceptique"
 illustration_alt: "Invité souriant mais réservé assis face à une table de tarot lors d'une réception"
