@@ -622,3 +622,6 @@ html.js hr.rule[data-anim].est-vu { scale: 1 1; }
   .precommande-visuel { min-height: 15rem; }
   .precommande-visuel img { width: 7.5rem; }
 }
+
+/* Images insérées dans le corps des articles */
+.post-body img { display: block; width: 100%; height: auto; margin: 2.25rem 0; border: 1px solid var(--brun-cl); border-radius: 3px; }

@@ -62,3 +62,69 @@ natacha-portrait:
   w: 620
   h: 775
   widths: [480, 620]
+
+# Visuels blog ajoutés le 27.11.2026
+devis-budget:
+  w: 1000
+  h: 667
+  widths: [480, 768, 1000]
+devis-budget-02:
+  w: 1000
+  h: 667
+  widths: [480, 768, 1000]
+devis-budget-03:
+  w: 1000
+  h: 667
+  widths: [480, 768, 1000]
+devis-budget-04:
+  w: 1000
+  h: 667
+  widths: [480, 768, 1000]
+flux-invites:
+  w: 1000
+  h: 667
+  widths: [480, 768, 1000]
+flux-invites-02:
+  w: 1000
+  h: 667
+  widths: [480, 768, 1000]
+flux-invites-03:
+  w: 1000
+  h: 667
+  widths: [480, 768, 1000]
+flux-invites-04:
+  w: 1000
+  h: 667
+  widths: [480, 768, 1000]
+invite-sceptique:
+  w: 1000
+  h: 667
+  widths: [480, 768, 1000]
+invite-sceptique-02:
+  w: 1000
+  h: 667
+  widths: [480, 768, 1000]
+invite-sceptique-03:
+  w: 1000
+  h: 667
+  widths: [480, 768, 1000]
+invite-sceptique-04:
+  w: 1000
+  h: 667
+  widths: [480, 768, 1000]
+vin-honneur-02:
+  w: 1000
+  h: 667
+  widths: [480, 768, 1000]
+vin-honneur-03:
+  w: 1000
+  h: 667
+  widths: [480, 768, 1000]
+vin-honneur-04:
+  w: 1000
+  h: 667
+  widths: [480, 768, 1000]
+vin-honneur:
+  w: 1200
+  h: 800
+  widths: [480, 768, 1000, 1200]
